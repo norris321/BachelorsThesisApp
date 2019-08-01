@@ -1,0 +1,35 @@
+﻿@model WebApplication.Models.AddAlbumModel
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Dodaj album</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NewArtistName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NewArtistName, new { htmlAttributes = new { style = "Color:Black" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NewAlbumName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NewAlbumName, new { htmlAttributes = new { style = "Color:Black" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10" style="color:black">
+                <input type="submit" value="send">
+            </div>
+        </div>
+    </div>
+}
+
+@ViewBag.Message
+@Html.ValidationMessage("error", new { style = "color:black" })

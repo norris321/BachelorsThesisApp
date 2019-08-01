@@ -1,0 +1,30 @@
+﻿@model WebApplication.Models.ShowRatingsModel
+@{
+    ViewBag.Title = "ShowRatings";
+}
+
+<h2>ShowRatings</h2>
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Wykonawca</th>
+            <th>Album</th>
+            <th>Ocena</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+            @foreach (var t in Model.Ratings)
+            {
+                <tr>
+
+                    <td>@t.ArtisName </td>
+                    <td>@t.AlbumName </td>
+                    <td>@t.Rating </td>
+                    
+                </tr>
+            }
+    </tbody>
+</table>

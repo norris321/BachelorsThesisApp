@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="MusicService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/WcfService.DataContracts" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IMusicService_GetAlbums_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAlbums" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_GetAlbums_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAlbumsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_Login_InputMessage">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_Login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_GetAlbum_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAlbum" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_GetAlbum_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAlbumResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_AddAlbum_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddAlbum" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_AddAlbum_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddAlbumResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_GetUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsers" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_GetUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_GetUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUser" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_GetUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_GetUserByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByName" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_GetUserByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_AddUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddUser" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_AddUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_GetRatings_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRatings" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_GetRatings_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRatingsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_GetRating_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRating" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_GetRating_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRatingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_AddRating_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddRating" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_AddRating_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddRatingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_ModifyUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyUser" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_ModifyUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_ModyifyAlbum_InputMessage">
+    <wsdl:part name="parameters" element="tns:ModyifyAlbum" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_ModyifyAlbum_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ModyifyAlbumResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_ModifyRating_InputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyRating" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_ModifyRating_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyRatingResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IMusicService">
+    <wsdl:operation name="GetAlbums">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/GetAlbums" message="tns:IMusicService_GetAlbums_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicService/GetAlbumsResponse" message="tns:IMusicService_GetAlbums_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/Login" message="tns:IMusicService_Login_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicService/LoginResponse" message="tns:IMusicService_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAlbum">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/GetAlbum" message="tns:IMusicService_GetAlbum_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicService/GetAlbumResponse" message="tns:IMusicService_GetAlbum_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAlbum">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/AddAlbum" message="tns:IMusicService_AddAlbum_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicService/AddAlbumResponse" message="tns:IMusicService_AddAlbum_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/GetUsers" message="tns:IMusicService_GetUsers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicService/GetUsersResponse" message="tns:IMusicService_GetUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/GetUser" message="tns:IMusicService_GetUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicService/GetUserResponse" message="tns:IMusicService_GetUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/GetUserByName" message="tns:IMusicService_GetUserByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicService/GetUserByNameResponse" message="tns:IMusicService_GetUserByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/AddUser" message="tns:IMusicService_AddUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicService/AddUserResponse" message="tns:IMusicService_AddUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRatings">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/GetRatings" message="tns:IMusicService_GetRatings_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicService/GetRatingsResponse" message="tns:IMusicService_GetRatings_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRating">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/GetRating" message="tns:IMusicService_GetRating_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicService/GetRatingResponse" message="tns:IMusicService_GetRating_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddRating">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/AddRating" message="tns:IMusicService_AddRating_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicService/AddRatingResponse" message="tns:IMusicService_AddRating_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/ModifyUser" message="tns:IMusicService_ModifyUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicService/ModifyUserResponse" message="tns:IMusicService_ModifyUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ModyifyAlbum">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/ModyifyAlbum" message="tns:IMusicService_ModyifyAlbum_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicService/ModyifyAlbumResponse" message="tns:IMusicService_ModyifyAlbum_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyRating">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/ModifyRating" message="tns:IMusicService_ModifyRating_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicService/ModifyRatingResponse" message="tns:IMusicService_ModifyRating_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IMusicService" type="tns:IMusicService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAlbums">
+      <soap:operation soapAction="http://tempuri.org/IMusicService/GetAlbums" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/IMusicService/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlbum">
+      <soap:operation soapAction="http://tempuri.org/IMusicService/GetAlbum" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAlbum">
+      <soap:operation soapAction="http://tempuri.org/IMusicService/AddAlbum" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <soap:operation soapAction="http://tempuri.org/IMusicService/GetUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <soap:operation soapAction="http://tempuri.org/IMusicService/GetUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByName">
+      <soap:operation soapAction="http://tempuri.org/IMusicService/GetUserByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUser">
+      <soap:operation soapAction="http://tempuri.org/IMusicService/AddUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRatings">
+      <soap:operation soapAction="http://tempuri.org/IMusicService/GetRatings" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRating">
+      <soap:operation soapAction="http://tempuri.org/IMusicService/GetRating" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddRating">
+      <soap:operation soapAction="http://tempuri.org/IMusicService/AddRating" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyUser">
+      <soap:operation soapAction="http://tempuri.org/IMusicService/ModifyUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModyifyAlbum">
+      <soap:operation soapAction="http://tempuri.org/IMusicService/ModyifyAlbum" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyRating">
+      <soap:operation soapAction="http://tempuri.org/IMusicService/ModifyRating" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MusicService">
+    <wsdl:port name="BasicHttpBinding_IMusicService" binding="tns:BasicHttpBinding_IMusicService">
+      <soap:address location="http://localhost:8733/Design_Time_Addresses/WcfService/Service1/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

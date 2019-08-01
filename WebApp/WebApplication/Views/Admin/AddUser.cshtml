@@ -1,0 +1,45 @@
+﻿@model WebApplication.Models.AddUserModel
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Add new user</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Username, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { style = "Color:Black" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { style = "Color:Black" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rank, new { @class = "control-label col-md-2" })
+            <div class="col-md-10" style="color:black">
+                @Html.DropDownListFor(m => m.Rank, WebApplication.Models.AddUserModel.GetRanks(), new { htmlAttributes = new { style = "color:black" } })
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10" style="color:black">
+                <input type="submit" value="send">
+            </div>
+        </div>
+    </div>
+}
+<div class="col-md-offset-2 col-md-10">
+    @Html.ValidationMessage("error")
+    @ViewBag.Message
+</div>
+

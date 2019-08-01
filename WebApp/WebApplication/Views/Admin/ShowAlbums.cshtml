@@ -1,0 +1,30 @@
+﻿@model WebApplication.Models.ShowAlbumsModel
+
+@{
+    ViewBag.Title = "ShowAlbums";
+}
+
+<h2>ShowAlbums</h2>
+
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Artist</th>
+                <th>Album</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model.albums)
+                {
+                    <tr>
+                        <td>@item.ArtistName</td>
+                        <td>@item.AlbumName</td>
+                        <td></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>

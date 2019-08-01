@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Admin panel";
+}
+
+@{
+    var user = User.Identity.Name;
+}
+
+<p>
+    Hello @user
+</p>
+
+
+<h2>Admin panel</h2>
+
+<div>@Html.ActionLink("Add the new album", "AddAlbum", "User")</div>
+<div>@Html.ActionLink("Rate an album", "AddRating", "User")</div>
+<div>@Html.ActionLink("Add the new user", "AddUser", "Admin")</div>
+<div>@Html.ActionLink("Show Albums", "ShowAlbums", "Admin")</div>
+
+
+
+

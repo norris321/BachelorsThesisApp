@@ -1,0 +1,20 @@
+﻿@model WebApplication.Models.AddRatingModel
+
+@Html.ValidationSummary(true)
+@Html.AntiForgeryToken()
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+
+        @Html.DropDownListFor(m => m.Album, WebApplication.Models.AddRatingModel.ChooseAlbum(), new { style = "color:black" })
+
+        @Html.DropDownListFor(m => m.Rating, WebApplication.Models.AddRatingModel.RateAlbum(), new { style = "color:black" })
+        <input type="submit" value="Rate" style="color:black" />
+    </div>
+}
+
+<div>
+    @ViewBag.Message
+    @Html.ValidationMessage("error")
+</div>
