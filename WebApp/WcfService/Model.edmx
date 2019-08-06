@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MusicDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="MusicDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Album">
           <Key>
             <PropertyRef Name="IdAlbum" />
@@ -29,7 +29,7 @@
           <Property Name="IdUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Username" Type="nvarchar" MaxLength="30" />
           <Property Name="Password" Type="varchar" MaxLength="16" />
-          <Property Name="Rank" Type="nchar" MaxLength="16" Nullable="false" />
+          <Property Name="Rank" Type="varchar" MaxLength="16" Nullable="false" />
         </EntityType>
         <Association Name="FK_Ratings_Album">
           <End Role="Album" Type="Self.Album" Multiplicity="1" />
@@ -55,7 +55,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="MusicDBModelStoreContainer">
+        <EntityContainer Name="MusicDatabaseModelStoreContainer">
           <EntitySet Name="Album" EntityType="Self.Album" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ratings" EntityType="Self.Ratings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
@@ -72,7 +72,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="MusicDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="MusicDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Album">
           <Key>
             <PropertyRef Name="IdAlbum" />
@@ -100,7 +100,7 @@
           <Property Name="IdUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Username" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="Rank" Type="String" MaxLength="16" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Rank" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Ratings" Relationship="Self.FK_Ratings_User" FromRole="User" ToRole="Ratings" />
         </EntityType>
         <Association Name="FK_Ratings_Album">
@@ -127,7 +127,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="MusicDBEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="MusicDatabaseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Albums" EntityType="Self.Album" />
           <EntitySet Name="Ratings" EntityType="Self.Rating" />
           <EntitySet Name="Users" EntityType="Self.User" />
@@ -145,9 +145,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MusicDBModelStoreContainer" CdmEntityContainer="MusicDBEntities">
+        <EntityContainerMapping StorageEntityContainer="MusicDatabaseModelStoreContainer" CdmEntityContainer="MusicDatabaseEntities">
           <EntitySetMapping Name="Albums">
-            <EntityTypeMapping TypeName="MusicDBModel.Album">
+            <EntityTypeMapping TypeName="MusicDatabaseModel.Album">
               <MappingFragment StoreEntitySet="Album">
                 <ScalarProperty Name="IdAlbum" ColumnName="IdAlbum" />
                 <ScalarProperty Name="ArtistName" ColumnName="ArtistName" />
@@ -156,7 +156,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Ratings">
-            <EntityTypeMapping TypeName="MusicDBModel.Rating">
+            <EntityTypeMapping TypeName="MusicDatabaseModel.Rating">
               <MappingFragment StoreEntitySet="Ratings">
                 <ScalarProperty Name="IdRating" ColumnName="IdRating" />
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
@@ -166,7 +166,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="MusicDBModel.User">
+            <EntityTypeMapping TypeName="MusicDatabaseModel.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
                 <ScalarProperty Name="Username" ColumnName="Username" />

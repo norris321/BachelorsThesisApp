@@ -108,11 +108,9 @@
     <Compile Include="DataContracts\AlbumContract.cs" />
     <Compile Include="DataContracts\RatingContract.cs" />
     <Compile Include="DataContracts\UserContract.cs" />
-    <Compile Include="IMusicDBEntities.cs" />
     <Compile Include="IMusicService.cs" />
     <Compile Include="Logic\IMusicProcessor.cs" />
     <Compile Include="Logic\MusicProcessor.cs" />
-    <Compile Include="Utilities\DataAccess.cs" />
     <Compile Include="Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -128,14 +126,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MusicService.cs" />
     <Compile Include="Rating.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\DataAccess.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MusicService.cs" />
     <Compile Include="Utilities\IDataAccess.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -152,10 +151,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model.Context.cs</LastGenOutput>
       <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -163,10 +165,6 @@
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <VSToolsPath Condition="'$(VSToolsPath)' == '' and '$(VisualStudioVersion)' != '' and '$(VisualStudioVersion)' != '11.0'">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

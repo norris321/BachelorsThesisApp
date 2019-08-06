@@ -126,7 +126,7 @@ namespace WcfService
 
         public string ModifyRating(int id, int idUser, int idAlbum, int rating)
         {
-            using (MusicDBEntities entities = new MusicDBEntities())
+            using (MusicDatabaseEntities entities = new MusicDatabaseEntities())
             {
                 var album = (from a in entities.Albums where a.IdAlbum == idAlbum select a).SingleOrDefault();
                 var user = (from u in entities.Users where u.IdUser == idUser select u).SingleOrDefault();

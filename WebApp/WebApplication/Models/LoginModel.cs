@@ -9,9 +9,11 @@ namespace WebApplication.Models
     public class LoginModel
     {
         [Required]
+        [MaxLength(30)]
         public string Username { set; get; }
 
         [Required]
+        [MaxLength(16)]
         [DataType(DataType.Password)]
         public string Password { set; get; }
     }

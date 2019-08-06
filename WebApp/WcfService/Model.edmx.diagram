@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="43b1596158514ef0b1570a7faa19cb8f" Name="Diagram1">
-        <EntityTypeShape EntityType="MusicDBModel.Album" Width="1.5" PointX="9.125" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MusicDBModel.Rating" Width="1.5" PointX="5" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MusicDBModel.User" Width="1.5" PointX="0.5" PointY="1.375" IsExpanded="true" />
-        <AssociationConnector Association="MusicDBModel.FK_Ratings_Album" ManuallyRouted="false" />
-        <AssociationConnector Association="MusicDBModel.FK_Ratings_User" ManuallyRouted="false" />
+      <Diagram DiagramId="10ea1bb3157b4f4290b9471e5434177e" Name="Diagram1">
+        <EntityTypeShape EntityType="MusicDatabaseModel.Album" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicDatabaseModel.Rating" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicDatabaseModel.User" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="MusicDatabaseModel.FK_Ratings_Album" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicDatabaseModel.FK_Ratings_User" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

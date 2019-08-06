@@ -11,9 +11,7 @@ namespace WcfService
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
-
-    [DataContract]
+    
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,13 +19,10 @@ namespace WcfService
         {
             this.Ratings = new HashSet<Rating>();
         }
-        [DataMember]
+    
         public int IdUser { get; set; }
-        [DataMember]
         public string Username { get; set; }
-        [DataMember]
         public string Password { get; set; }
-        [DataMember]
         public string Rank { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

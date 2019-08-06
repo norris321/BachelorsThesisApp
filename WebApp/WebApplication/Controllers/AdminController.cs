@@ -31,7 +31,8 @@ namespace WebApplication.Controllers
         public ActionResult AddUser(AddUserModel model)
         {
             string msg = model.AddUser();
-            return Content(msg);
+            ViewBag.Message = msg;
+            return View();
         }
 
     }

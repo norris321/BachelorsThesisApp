@@ -20,11 +20,11 @@ namespace WebApplication.Security
             UserId = user.IdUser;
             FirstName = user.Username;
             Roles = new List<RoleModel>();
-            if(user.Rank == "user")
+            if(user.Rank == "user" || user.Rank == "User")
             {
                 Roles.Add(new RoleModel("User"));
             }
-            else if(user.Rank == "admin")
+            else if(user.Rank == "admin" || user.Rank == "Admin")
             {
                 Roles.Add(new RoleModel("User"));
                 Roles.Add(new RoleModel("Admin"));

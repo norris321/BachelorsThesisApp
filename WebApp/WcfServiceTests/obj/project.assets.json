@@ -6435,11 +6435,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Programowanie\\10_WCF_finalMVC\\WebApp\\WcfServiceTests\\WcfServiceTests.csproj",
+      "projectUniqueName": "C:\\Programowanie\\11_WCF_MVC_localDB\\WebApp\\WcfServiceTests\\WcfServiceTests.csproj",
       "projectName": "WcfServiceTests",
-      "projectPath": "C:\\Programowanie\\10_WCF_finalMVC\\WebApp\\WcfServiceTests\\WcfServiceTests.csproj",
+      "projectPath": "C:\\Programowanie\\11_WCF_MVC_localDB\\WebApp\\WcfServiceTests\\WcfServiceTests.csproj",
       "packagesPath": "C:\\Users\\Ja\\.nuget\\packages\\",
-      "outputPath": "C:\\Programowanie\\10_WCF_finalMVC\\WebApp\\WcfServiceTests\\obj\\",
+      "outputPath": "C:\\Programowanie\\11_WCF_MVC_localDB\\WebApp\\WcfServiceTests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -6458,8 +6458,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\Programowanie\\10_WCF_finalMVC\\WebApp\\WcfService\\WcfService.csproj": {
-              "projectPath": "C:\\Programowanie\\10_WCF_finalMVC\\WebApp\\WcfService\\WcfService.csproj"
+            "C:\\Programowanie\\11_WCF_MVC_localDB\\WebApp\\WcfService\\WcfService.csproj": {
+              "projectPath": "C:\\Programowanie\\11_WCF_MVC_localDB\\WebApp\\WcfService\\WcfService.csproj"
             }
           }
         }

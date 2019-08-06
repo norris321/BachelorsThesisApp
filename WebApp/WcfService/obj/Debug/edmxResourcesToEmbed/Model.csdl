@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="MusicDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="MusicDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="Album">
     <Key>
       <PropertyRef Name="IdAlbum" />
@@ -27,7 +27,7 @@
     <Property Name="IdUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Username" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
     <Property Name="Password" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-    <Property Name="Rank" Type="String" MaxLength="16" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Rank" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Ratings" Relationship="Self.FK_Ratings_User" FromRole="User" ToRole="Ratings" />
   </EntityType>
   <Association Name="FK_Ratings_Album">
@@ -54,7 +54,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="MusicDBEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="MusicDatabaseEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Albums" EntityType="Self.Album" />
     <EntitySet Name="Ratings" EntityType="Self.Rating" />
     <EntitySet Name="Users" EntityType="Self.User" />

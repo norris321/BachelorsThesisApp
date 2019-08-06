@@ -11,7 +11,7 @@ namespace WcfService.Utilities
     {
         public Album ReadData_Album(int id)
         {
-            using (var context = new MusicDBEntities())
+            using (var context = new MusicDatabaseEntities())
             {
                 try
                 {
@@ -31,7 +31,7 @@ namespace WcfService.Utilities
 
         public Album[] ReadData_Albums()
         {
-            using (var context = new MusicDBEntities())
+            using (var context = new MusicDatabaseEntities())
             {
                 try
                 {
@@ -47,7 +47,7 @@ namespace WcfService.Utilities
 
         public Rating ReadData_Rating(int id)
         {
-            using (var context = new MusicDBEntities())
+            using (var context = new MusicDatabaseEntities())
             {
                 try
                 {
@@ -97,7 +97,7 @@ namespace WcfService.Utilities
 
         public Rating[] ReadData_Ratings()
         {
-            using (var context = new MusicDBEntities())
+            using (var context = new MusicDatabaseEntities())
             {
                 try
                 {
@@ -142,7 +142,7 @@ namespace WcfService.Utilities
 
         public User ReadData_User(int id)
         {
-            using (var context = new MusicDBEntities())
+            using (var context = new MusicDatabaseEntities())
             {
                 try
                 {
@@ -162,7 +162,7 @@ namespace WcfService.Utilities
 
         public User ReadData_User(string username, string password)
         {
-            using (var context = new MusicDBEntities())
+            using (var context = new MusicDatabaseEntities())
             {
                 try
                 {
@@ -184,7 +184,7 @@ namespace WcfService.Utilities
 
         public User ReadData_User(string username)
         {
-            using (var context = new MusicDBEntities())
+            using (var context = new MusicDatabaseEntities())
             {
                 try
                 {
@@ -206,7 +206,7 @@ namespace WcfService.Utilities
 
         public User[] ReadData_Users()
         {
-            using (var context = new MusicDBEntities())
+            using (var context = new MusicDatabaseEntities())
             {
                 try
                 {
@@ -222,7 +222,7 @@ namespace WcfService.Utilities
 
         public bool SaveData_Album(Album album)
         {
-            using (var context = new MusicDBEntities())
+            using (var context = new MusicDatabaseEntities())
             {
                 try
                 {
@@ -234,7 +234,7 @@ namespace WcfService.Utilities
                     context.SaveChanges();
                     return true;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     return false;
                 }
@@ -243,7 +243,7 @@ namespace WcfService.Utilities
 
         public bool SaveData_Rating(Rating rating)
         {
-            using (var context = new MusicDBEntities())
+            using (var context = new MusicDatabaseEntities())
             {
                 try
                 {
@@ -269,7 +269,7 @@ namespace WcfService.Utilities
 
         public bool SaveData_User(User user)
         {
-            using (var context = new MusicDBEntities())
+            using (var context = new MusicDatabaseEntities())
             {
                 var isUserAlreadySaved = (from u in context.Users where user.Username == u.Username select u).SingleOrDefault();
                 if (isUserAlreadySaved != null)
@@ -290,7 +290,7 @@ namespace WcfService.Utilities
 
         public bool UpdateData_Album(Album album)
         {
-            using (var context = new MusicDBEntities())
+            using (var context = new MusicDatabaseEntities())
             {
                 try
                 {
@@ -310,7 +310,7 @@ namespace WcfService.Utilities
 
         public bool UpdateData_Rating(Rating rating)
         {
-            using (var context = new MusicDBEntities())
+            using (var context = new MusicDatabaseEntities())
             {
                 try
                 {
@@ -332,7 +332,7 @@ namespace WcfService.Utilities
 
         public bool UpdateData_User(User user)
         {
-            using (var context = new MusicDBEntities())
+            using (var context = new MusicDatabaseEntities())
             {
                 try
                 {

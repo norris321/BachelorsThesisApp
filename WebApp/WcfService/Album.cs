@@ -11,24 +11,19 @@ namespace WcfService
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
-
+    
     public partial class Album
     {
-        
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Album()
         {
             this.Ratings = new HashSet<Rating>();
         }
-
-
+    
         public int IdAlbum { get; set; }
-
         public string ArtistName { get; set; }
-
         public string AlbumName { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Rating> Ratings { get; set; }
     }

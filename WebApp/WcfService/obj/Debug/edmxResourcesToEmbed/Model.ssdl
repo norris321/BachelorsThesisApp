@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="MusicDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="MusicDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Album">
     <Key>
       <PropertyRef Name="IdAlbum" />
@@ -24,7 +24,7 @@
     <Property Name="IdUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Username" Type="nvarchar" MaxLength="30" />
     <Property Name="Password" Type="varchar" MaxLength="16" />
-    <Property Name="Rank" Type="nchar" MaxLength="16" Nullable="false" />
+    <Property Name="Rank" Type="varchar" MaxLength="16" Nullable="false" />
   </EntityType>
   <Association Name="FK_Ratings_Album">
     <End Role="Album" Type="Self.Album" Multiplicity="1" />
@@ -50,7 +50,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="MusicDBModelStoreContainer">
+  <EntityContainer Name="MusicDatabaseModelStoreContainer">
     <EntitySet Name="Album" EntityType="Self.Album" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ratings" EntityType="Self.Ratings" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />

@@ -45,7 +45,7 @@ namespace WcfService.DataContracts
         public Rating ToRating()
         {
             //Album album = new Album { ArtistName = ArtistName, AlbumName = AlbumName };
-            using (var context = new MusicDBEntities())
+            using (var context = new MusicDatabaseEntities())
             {
                 var album = (from a in context.Albums where a.ArtistName == ArtistName && a.AlbumName == AlbumName select a).SingleOrDefault();
                 var user = (from u in context.Users where u.IdUser == IdUser select u).SingleOrDefault();

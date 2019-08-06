@@ -45,6 +45,19 @@ namespace WebApplication.Controllers
                         HttpCookie faCookie = new HttpCookie("Cookie1", enTicket);
                         Response.Cookies.Add(faCookie);
 
+                        if(user.Roles.Count == 2)
+                        {
+                            return RedirectToAction("Index", "Admin");
+                        }
+                        else if (user.Roles.Count == 1)
+                        {
+                            return RedirectToAction("Index", "User");
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
+
                     }
                 }
                 else
@@ -54,20 +67,9 @@ namespace WebApplication.Controllers
                     //ModelState.AddModelError("", "Something Wrong : Username or Password invalid");
                 }
             }
-            if (User.IsInRole("Admin"))
-            {
-                return RedirectToAction("Index", "Admin");
-            }
-            else if (User.IsInRole("User"))
-            {
-                return RedirectToAction("Index", "User");
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
 
-            //return RedirectToAction("Index", "Home");
+
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult LogOut()

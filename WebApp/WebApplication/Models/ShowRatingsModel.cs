@@ -12,13 +12,9 @@ namespace WebApplication.Models
         {
             get
             {
-                //return null;
                 return GetRatings();
-                //return ratings;
             }
         }
-
-        //private RatingContract[] ratings { set; get; }
 
         private  RatingModel[] GetRatings()
         {
@@ -33,8 +29,6 @@ namespace WebApplication.Models
                     {
                         if(dictionary.ContainsKey(a.IdAlbum))
                         {
-                            //dictionary.Add(a.IdAlbum, )
-                            //dictionary[a.IdAlbum].Rating += a.Rating;
                             dictionary[a.IdAlbum].Add(a.Rating);
                         }
                         else
@@ -84,7 +78,13 @@ namespace WebApplication.Models
                     foreach (var r in ratings)
                         output += r;
 
-                    return output / ratings.Count;
+                    output = output / ratings.Count;
+                    if (output == null || output == 0)
+                        return output;
+                    else
+                        output = Decimal.Round((decimal)output, 2);
+
+                    return output;
                 }
             }
 

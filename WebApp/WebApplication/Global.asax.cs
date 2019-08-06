@@ -27,19 +27,25 @@ namespace WebApplication
             HttpCookie authCookie = Request.Cookies["Cookie1"];
             if (authCookie != null)
             {
-                FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+                try
+                {
+                    FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
 
-                var serializeModel = JsonConvert.DeserializeObject<CustomSerializeModel>(authTicket.UserData);
+                    var serializeModel = JsonConvert.DeserializeObject<CustomSerializeModel>(authTicket.UserData);
 
-                CustomPrincipal principal = new CustomPrincipal(authTicket.Name);
+                    CustomPrincipal principal = new CustomPrincipal(authTicket.Name);
 
-                principal.UserId = serializeModel.IdUser;
-                principal.Username = serializeModel.Username;
-                principal.Roles = serializeModel.RoleName.ToArray<string>();
+                    principal.UserId = serializeModel.IdUser;
+                    principal.Username = serializeModel.Username;
+                    principal.Roles = serializeModel.RoleName.ToArray<string>();
 
-                HttpContext.Current.User = principal;
+                    HttpContext.Current.User = principal;
+                }
+                catch(ArgumentException)
+                {
+                    HttpContext.Current.User = null;
+                }
             }
-
         }
     }
 }

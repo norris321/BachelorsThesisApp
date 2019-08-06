@@ -13,10 +13,10 @@ namespace WcfService
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MusicDBEntities : DbContext, IMusicDBEntities
+    public partial class MusicDatabaseEntities : DbContext
     {
-        public MusicDBEntities()
-            : base("name=MusicDBEntities")
+        public MusicDatabaseEntities()
+            : base("name=MusicDatabaseEntities")
         {
         }
     
@@ -24,49 +24,7 @@ namespace WcfService
         {
             throw new UnintentionalCodeFirstException();
         }
-
-        public bool SaveAlbum(Album album)
-        {
-            try
-            {
-                Albums.Add(album);
-                SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-        public bool SaveUser(User user)
-        {
-            try
-            {
-                Users.Add(user);
-                SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-        public bool SaveRating(Rating rating)
-        {
-            try
-            {
-                Ratings.Add(rating);
-                SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
+    
         public virtual DbSet<Album> Albums { get; set; }
         public virtual DbSet<Rating> Ratings { get; set; }
         public virtual DbSet<User> Users { get; set; }

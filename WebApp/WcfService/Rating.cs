@@ -11,21 +11,15 @@ namespace WcfService
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
-
+    
     public partial class Rating
     {
-
         public int IdRating { get; set; }
-
         public int IdUser { get; set; }
-
         public int IdAlbum { get; set; }
-
         public Nullable<int> Rating1 { get; set; }
-
+    
         public virtual Album Album { get; set; }
-
         public virtual User User { get; set; }
     }
 }

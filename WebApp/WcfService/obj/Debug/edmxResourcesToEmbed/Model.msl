@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="MusicDBModelStoreContainer" CdmEntityContainer="MusicDBEntities">
+  <EntityContainerMapping StorageEntityContainer="MusicDatabaseModelStoreContainer" CdmEntityContainer="MusicDatabaseEntities">
     <EntitySetMapping Name="Albums">
-      <EntityTypeMapping TypeName="MusicDBModel.Album">
+      <EntityTypeMapping TypeName="MusicDatabaseModel.Album">
         <MappingFragment StoreEntitySet="Album">
           <ScalarProperty Name="IdAlbum" ColumnName="IdAlbum" />
           <ScalarProperty Name="ArtistName" ColumnName="ArtistName" />
@@ -11,7 +11,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Ratings">
-      <EntityTypeMapping TypeName="MusicDBModel.Rating">
+      <EntityTypeMapping TypeName="MusicDatabaseModel.Rating">
         <MappingFragment StoreEntitySet="Ratings">
           <ScalarProperty Name="IdRating" ColumnName="IdRating" />
           <ScalarProperty Name="IdUser" ColumnName="IdUser" />
@@ -21,7 +21,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Users">
-      <EntityTypeMapping TypeName="MusicDBModel.User">
+      <EntityTypeMapping TypeName="MusicDatabaseModel.User">
         <MappingFragment StoreEntitySet="User">
           <ScalarProperty Name="IdUser" ColumnName="IdUser" />
           <ScalarProperty Name="Username" ColumnName="Username" />

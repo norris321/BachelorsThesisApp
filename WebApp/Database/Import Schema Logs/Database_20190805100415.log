@@ -1,0 +1,85 @@
+8/5/2019 12:04:15 PM	This log contains information about the import schema operation into project 'Database' on computer 'DESKTOP-445M0ON' by user 'Ja'.
+8/5/2019 12:04:15 PM	Import of database schema has started.
+8/5/2019 12:04:19 PM	Gathering database credentials
+8/5/2019 12:04:19 PM	Gathering database options
+8/5/2019 12:04:19 PM	Gathering generic database scoped configuration option
+8/5/2019 12:04:19 PM	Gathering users
+8/5/2019 12:04:19 PM	Gathering roles
+8/5/2019 12:04:19 PM	Gathering application roles
+8/5/2019 12:04:19 PM	Gathering role memberships
+8/5/2019 12:04:19 PM	Gathering filegroups
+8/5/2019 12:04:19 PM	Gathering full-text catalogs
+8/5/2019 12:04:19 PM	Gathering assemblies
+8/5/2019 12:04:19 PM	Gathering certificates
+8/5/2019 12:04:19 PM	Gathering asymmetric keys
+8/5/2019 12:04:19 PM	Gathering symmetric keys
+8/5/2019 12:04:19 PM	Gathering encrypted symmetric keys
+8/5/2019 12:04:19 PM	Gathering schemas
+8/5/2019 12:04:19 PM	Gathering XML schema collections
+8/5/2019 12:04:19 PM	Gathering user-defined data types
+8/5/2019 12:04:19 PM	Gathering user-defined types
+8/5/2019 12:04:19 PM	Gathering table types
+8/5/2019 12:04:19 PM	Gathering unique keys for table types
+8/5/2019 12:04:19 PM	Gathering primary keys for table types
+8/5/2019 12:04:19 PM	Gathering indexes for table types
+8/5/2019 12:04:19 PM	Gathering check constraints for table types
+8/5/2019 12:04:19 PM	Gathering default constraints for table types
+8/5/2019 12:04:19 PM	Gathering partition functions
+8/5/2019 12:04:19 PM	Gathering partition schemes
+8/5/2019 12:04:19 PM	Gathering functions
+8/5/2019 12:04:19 PM	Gathering encrypted functions
+8/5/2019 12:04:19 PM	Gathering aggregates
+8/5/2019 12:04:19 PM	Gathering procedures
+8/5/2019 12:04:19 PM	Gathering encrypted procedures
+8/5/2019 12:04:19 PM	Gathering tables
+8/5/2019 12:04:19 PM	Gathering primary keys
+8/5/2019 12:04:19 PM	Gathering unique constraints
+8/5/2019 12:04:19 PM	Gathering foreign keys
+8/5/2019 12:04:19 PM	Gathering default constraints
+8/5/2019 12:04:19 PM	Gathering check constraints
+8/5/2019 12:04:19 PM	Gathering views
+8/5/2019 12:04:19 PM	Gathering encrypted views
+8/5/2019 12:04:19 PM	Gathering indexes
+8/5/2019 12:04:19 PM	Gathering statistics
+8/5/2019 12:04:19 PM	Gathering full-text index stoplists
+8/5/2019 12:04:19 PM	Gathering search property lists
+8/5/2019 12:04:19 PM	Gathering search properties
+8/5/2019 12:04:19 PM	Gathering full-text indexes
+8/5/2019 12:04:19 PM	Gathering column store indexes
+8/5/2019 12:04:20 PM	Gathering spatial indexes
+8/5/2019 12:04:20 PM	Gathering XML indexes
+8/5/2019 12:04:20 PM	Gathering Selective XML indexes
+8/5/2019 12:04:20 PM	Gathering encrypted triggers
+8/5/2019 12:04:20 PM	Gathering triggers
+8/5/2019 12:04:20 PM	Gathering encrypted and clr ddl triggers
+8/5/2019 12:04:20 PM	Gathering ddl triggers
+8/5/2019 12:04:20 PM	Gathering synonyms
+8/5/2019 12:04:20 PM	Gathering defaults
+8/5/2019 12:04:20 PM	Gathering data constraint uddt bindings
+8/5/2019 12:04:20 PM	Gathering rules
+8/5/2019 12:04:20 PM	Gathering data constraint uddt bindings
+8/5/2019 12:04:20 PM	Gathering message types
+8/5/2019 12:04:20 PM	Gathering queues
+8/5/2019 12:04:20 PM	Gathering contracts
+8/5/2019 12:04:20 PM	Gathering services
+8/5/2019 12:04:20 PM	Gathering event notifications
+8/5/2019 12:04:20 PM	Gathering remote service bindings
+8/5/2019 12:04:20 PM	Gathering broker priorities
+8/5/2019 12:04:20 PM	Gathering signatures
+8/5/2019 12:04:20 PM	Gathering data compression options
+8/5/2019 12:04:20 PM	Gathering sequence types
+8/5/2019 12:04:20 PM	Gathering security policies
+8/5/2019 12:04:20 PM	Gather column encryption keys
+8/5/2019 12:04:20 PM	Gathering column master keys
+8/5/2019 12:04:20 PM	Gathering external data sources
+8/5/2019 12:04:20 PM	Gathering external file formats
+8/5/2019 12:04:20 PM	Gathering external tables
+8/5/2019 12:04:20 PM	Gathering extended properties
+8/5/2019 12:04:20 PM	Gathering credentials
+8/5/2019 12:04:20 PM	Gathering logins
+8/5/2019 12:04:20 PM	Gathering server audits
+8/5/2019 12:04:20 PM	Scanning project for duplicate elements
+8/5/2019 12:04:20 PM	Finished duplicate element processing
+8/5/2019 12:04:20 PM	Finished importing database.
+8/5/2019 12:04:20 PM	A summary of the import was saved to the following location: C:\Programowanie\11_WCF_MVC_localDB\WebApp\Database\Import Schema Logs\Database_20190805100415.log
+8/5/2019 12:04:20 PM	Click Finish to continue...

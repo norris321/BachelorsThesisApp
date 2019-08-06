@@ -26,7 +26,8 @@ namespace WebApplication.Controllers
         public ActionResult AddAlbum(AddAlbumModel model)
         {
             string msg = model.AddAlbum();
-            return Content(msg);
+            ViewBag.Message = msg;
+            return View();
         }
 
         public ActionResult AddRating()
@@ -39,7 +40,8 @@ namespace WebApplication.Controllers
         {
             model.User =  User.Identity.Name;
             string msg =  model.Rate();
-            return Content(msg);
+            ViewBag.Message = msg;
+            return View();
         }
     }
 }
