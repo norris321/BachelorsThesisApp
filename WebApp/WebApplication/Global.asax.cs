@@ -41,9 +41,14 @@ namespace WebApplication
 
                     HttpContext.Current.User = principal;
                 }
-                catch(ArgumentException)
+                catch (Exception message)
                 {
-                    HttpContext.Current.User = null;
+                    HttpCookie cookie = new HttpCookie("Cookie1", "");
+                    cookie.Expires = DateTime.Now.AddYears(-1);
+                    Response.Cookies.Add(cookie);
+
+                    FormsAuthentication.SignOut();
+                    //HttpContext.Current.User = null;
                 }
             }
         }

@@ -5,16 +5,16 @@
 
 @using (Html.BeginForm())
 {
-    <div class="form-group">
+<div class="form-group" style="vertical-align:middle; text-align: center;">
 
-        @Html.DropDownListFor(m => m.Album, WebApplication.Models.AddRatingModel.ChooseAlbum(), new { style = "color:black" })
+    @Html.DropDownListFor(m => m.Album, WebApplication.Models.AddRatingModel.ChooseAlbum(), new { style = "color:black" })
 
-        @Html.DropDownListFor(m => m.Rating, WebApplication.Models.AddRatingModel.RateAlbum(), new { style = "color:black" })
+    @Html.DropDownListFor(m => m.Rating, WebApplication.Models.AddRatingModel.RateAlbum(), new { style = "color:black" })
         <input type="submit" value="Rate" style="color:black" />
     </div>
-}
+    }
 
-<div>
-    @ViewBag.Message
-    @Html.ValidationMessage("error")
-</div>
+    <div>
+        @ViewBag.Message
+        @Html.ValidationMessage("error")
+    </div>

@@ -139,6 +139,8 @@
     <Compile Include="Models\AddRatingModel.cs" />
     <Compile Include="Models\AddUserModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\ModifyAlbumModel.cs" />
+    <Compile Include="Models\ModifyUserModel.cs" />
     <Compile Include="Models\ShowAlbumsModel.cs" />
     <Compile Include="Models\ShowRatingsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -229,6 +231,8 @@
     <Content Include="Views\Error\AccessDenied.cshtml" />
     <Content Include="Views\Admin\AddUser.cshtml" />
     <Content Include="Views\ShowRatings\Index.cshtml" />
+    <Content Include="Views\Admin\ModifyAlbum.cshtml" />
+    <Content Include="Views\Admin\ModifyUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

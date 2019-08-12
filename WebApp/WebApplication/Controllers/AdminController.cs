@@ -27,12 +27,39 @@ namespace WebApplication.Controllers
         {
             return View(new AddUserModel());
         }
+
         [HttpPost]
         public ActionResult AddUser(AddUserModel model)
         {
             string msg = model.AddUser();
             ViewBag.Message = msg;
             return View();
+        }
+
+        public ActionResult ModifyAlbum()
+        {
+            return View(new ModifyAlbumModel());
+        }
+
+        [HttpPost]
+        public ActionResult ModifyAlbum(ModifyAlbumModel model)
+        {
+            var msg = model.Modify();
+            ViewBag.Message = msg;
+            return View(new ModifyAlbumModel());
+        }
+
+        public ActionResult ModifyUser()
+        {
+            return View(new ModifyUserModel());
+        }
+
+        [HttpPost]
+        public ActionResult ModifyUser(ModifyUserModel model)
+        {
+            var msg = model.Modify();
+            ViewBag.Message = msg;
+            return View(new ModifyUserModel());
         }
 
     }

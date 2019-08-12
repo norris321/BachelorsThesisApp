@@ -292,6 +292,19 @@ namespace WcfService.Utilities
         {
             using (var context = new MusicDatabaseEntities())
             {
+                var actualRecord = ReadData_Album(album.IdAlbum);
+
+                if(string.IsNullOrEmpty(album.ArtistName))
+                {
+                    album.ArtistName = actualRecord.ArtistName;
+                }
+
+                if (string.IsNullOrEmpty(album.AlbumName))
+                {
+                    album.AlbumName = actualRecord.AlbumName;
+                }
+
+
                 try
                 {
                     var record = context.Albums.Where(a => a.IdAlbum == album.IdAlbum).FirstOrDefault();
@@ -336,6 +349,23 @@ namespace WcfService.Utilities
             {
                 try
                 {
+                    var actualRecord = ReadData_User(user.IdUser);
+                    if(user.Username == null)
+                    {
+                        user.Username = actualRecord.Username;
+                    }
+
+                    if (user.Password == null)
+                    {
+                        user.Password = actualRecord.Password;
+                    }
+
+                    if (user.Rank == null)
+                    {
+                        user.Rank = actualRecord.Rank;
+                    }
+
+
                     var record = context.Users.Where(u => u.IdUser == user.IdUser).FirstOrDefault();
 
                     record.IdUser = user.IdUser;

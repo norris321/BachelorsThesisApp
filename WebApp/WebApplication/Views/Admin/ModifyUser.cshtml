@@ -1,0 +1,41 @@
+﻿@model WebApplication.Models.ModifyUserModel
+
+
+@Html.ValidationSummary(true)
+@Html.AntiForgeryToken()
+
+@using (Html.BeginForm())
+{
+<div class="form-group">
+
+    <div class="form-group" style="vertical-align:middle; text-align: center;">
+        Chose user to edit:
+        @Html.DropDownListFor(m => m.Id, WebApplication.Models.ModifyUserModel.SelectUser(), new { style = "color:black" })
+    </div>
+    <div class="form-group" style="vertical-align:middle; text-align: center;">
+        Modify user name:
+        @Html.EditorFor(model => model.NewUserName, new { htmlAttributes = new { style = "Color:Black" } })
+    </div>
+
+    <div class="form-group" style="vertical-align:middle; text-align: center;">
+        Modify password :
+        @Html.EditorFor(model => model.NewPassword, new { htmlAttributes = new { style = "Color:Black" } })
+    </div>
+
+    <div class="form-group" style="vertical-align:middle; text-align: center;">
+        Chose new user rank to edit:
+        @Html.DropDownListFor(m => m.Id, WebApplication.Models.ModifyUserModel.ChooseNewUserRating(), new { style = "color:black" })
+    </div>
+
+    <div class="col-lg-push-5" style="vertical-align:middle; text-align: center;">
+        <input type="submit" value="Rate" style="color:black" />
+        </div>
+    </div>
+    }
+
+
+
+<div class="col-lg-push-5" style="vertical-align:middle; text-align: center;">
+    @ViewBag.Message
+    @Html.ValidationMessage("error")
+</div>
