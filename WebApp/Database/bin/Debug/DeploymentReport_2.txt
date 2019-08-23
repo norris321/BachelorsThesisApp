@@ -1,0 +1,20 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Drop
+       [dbo].[FK_Ratings_Album] (Foreign Key)
+       [dbo].[FK_Ratings_User] (Foreign Key)
+     Create
+       [dbo].[Table1] (Table)
+       [dbo].[FK_Ratings_Album] (Foreign Key)
+       [dbo].[FK_Ratings_User] (Foreign Key)
+
+** Supporting actions

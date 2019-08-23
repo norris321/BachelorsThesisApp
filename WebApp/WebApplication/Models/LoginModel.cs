@@ -16,5 +16,13 @@ namespace WebApplication.Models
         [MaxLength(16)]
         [DataType(DataType.Password)]
         public string Password { set; get; }
+
+
+
+        //[System.Diagnostics.Conditional("DEBUG")]
+        public static void DebugLogIn()
+        {
+
+        }
     }
 }

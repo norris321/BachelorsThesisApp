@@ -132,6 +132,8 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ShowRatingsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="CustomController\MultipleButtonAttribute.cs" />
+    <Compile Include="CustomExceptions\NoUserFoundException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -140,6 +142,7 @@
     <Compile Include="Models\AddUserModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ModifyAlbumModel.cs" />
+    <Compile Include="Models\ModifyRatingModel.cs" />
     <Compile Include="Models\ModifyUserModel.cs" />
     <Compile Include="Models\ShowAlbumsModel.cs" />
     <Compile Include="Models\ShowRatingsModel.cs" />
@@ -233,6 +236,7 @@
     <Content Include="Views\ShowRatings\Index.cshtml" />
     <Content Include="Views\Admin\ModifyAlbum.cshtml" />
     <Content Include="Views\Admin\ModifyUser.cshtml" />
+    <Content Include="Views\User\ModifyRating.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

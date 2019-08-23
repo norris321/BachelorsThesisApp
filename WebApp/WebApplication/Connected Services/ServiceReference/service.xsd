@@ -124,6 +124,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetRatingsForUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRatingsForUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/WcfService.DataContracts" minOccurs="0" name="GetRatingsForUserResult" nillable="true" type="q9:ArrayOfRatingContract" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetRating">
     <xs:complexType>
       <xs:sequence>
@@ -134,7 +148,7 @@
   <xs:element name="GetRatingResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/WcfService.DataContracts" minOccurs="0" name="GetRatingResult" nillable="true" type="q9:RatingContract" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/WcfService.DataContracts" minOccurs="0" name="GetRatingResult" nillable="true" type="q10:RatingContract" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -190,10 +204,8 @@
   <xs:element name="ModifyRating">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="id" type="xs:int" />
-        <xs:element minOccurs="0" name="idUser" type="xs:int" />
-        <xs:element minOccurs="0" name="idAlbum" type="xs:int" />
-        <xs:element minOccurs="0" name="rating" type="xs:int" />
+        <xs:element minOccurs="0" name="idRating" type="xs:int" />
+        <xs:element minOccurs="0" name="newRating" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -201,6 +213,48 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="ModifyRatingResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteAlbum">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteAlbumResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DeleteAlbumResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DeleteUserResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteRating">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteRatingResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DeleteRatingResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

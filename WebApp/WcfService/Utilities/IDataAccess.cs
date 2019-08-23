@@ -20,10 +20,15 @@ namespace WcfService.Utilities
 
         Rating ReadData_Rating(int id);
         Rating[] ReadData_Ratings();
+        Rating[] ReadData_Ratings(int IdUser);
         bool SaveData_Rating(Rating rating);
 
         bool UpdateData_User(User user);
         bool UpdateData_Rating(Rating rating);
         bool UpdateData_Album(Album album);
+
+        bool DeleteData_Album(int id);
+        bool DeleteData_User(int id);
+        bool DeleteData_Rating(int id);
     }
 }

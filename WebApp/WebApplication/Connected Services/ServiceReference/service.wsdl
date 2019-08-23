@@ -61,6 +61,12 @@
   <wsdl:message name="IMusicService_GetRatings_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetRatingsResponse" />
   </wsdl:message>
+  <wsdl:message name="IMusicService_GetRatingsForUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRatingsForUser" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_GetRatingsForUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRatingsForUserResponse" />
+  </wsdl:message>
   <wsdl:message name="IMusicService_GetRating_InputMessage">
     <wsdl:part name="parameters" element="tns:GetRating" />
   </wsdl:message>
@@ -90,6 +96,24 @@
   </wsdl:message>
   <wsdl:message name="IMusicService_ModifyRating_OutputMessage">
     <wsdl:part name="parameters" element="tns:ModifyRatingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_DeleteAlbum_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteAlbum" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_DeleteAlbum_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteAlbumResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_DeleteUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUser" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_DeleteUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_DeleteRating_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRating" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_DeleteRating_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRatingResponse" />
   </wsdl:message>
   <wsdl:portType name="IMusicService">
     <wsdl:operation name="GetAlbums">
@@ -128,6 +152,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/GetRatings" message="tns:IMusicService_GetRatings_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMusicService/GetRatingsResponse" message="tns:IMusicService_GetRatings_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetRatingsForUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/GetRatingsForUser" message="tns:IMusicService_GetRatingsForUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicService/GetRatingsForUserResponse" message="tns:IMusicService_GetRatingsForUser_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetRating">
       <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/GetRating" message="tns:IMusicService_GetRating_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMusicService/GetRatingResponse" message="tns:IMusicService_GetRating_OutputMessage" />
@@ -147,6 +175,18 @@
     <wsdl:operation name="ModifyRating">
       <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/ModifyRating" message="tns:IMusicService_ModifyRating_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMusicService/ModifyRatingResponse" message="tns:IMusicService_ModifyRating_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAlbum">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/DeleteAlbum" message="tns:IMusicService_DeleteAlbum_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicService/DeleteAlbumResponse" message="tns:IMusicService_DeleteAlbum_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/DeleteUser" message="tns:IMusicService_DeleteUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicService/DeleteUserResponse" message="tns:IMusicService_DeleteUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRating">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/DeleteRating" message="tns:IMusicService_DeleteRating_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicService/DeleteRatingResponse" message="tns:IMusicService_DeleteRating_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IMusicService" type="tns:IMusicService">
@@ -232,6 +272,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetRatingsForUser">
+      <soap:operation soapAction="http://tempuri.org/IMusicService/GetRatingsForUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetRating">
       <soap:operation soapAction="http://tempuri.org/IMusicService/GetRating" style="document" />
       <wsdl:input>
@@ -270,6 +319,33 @@
     </wsdl:operation>
     <wsdl:operation name="ModifyRating">
       <soap:operation soapAction="http://tempuri.org/IMusicService/ModifyRating" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAlbum">
+      <soap:operation soapAction="http://tempuri.org/IMusicService/DeleteAlbum" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <soap:operation soapAction="http://tempuri.org/IMusicService/DeleteUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRating">
+      <soap:operation soapAction="http://tempuri.org/IMusicService/DeleteRating" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

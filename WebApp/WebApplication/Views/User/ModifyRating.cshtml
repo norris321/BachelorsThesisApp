@@ -1,0 +1,37 @@
+﻿@model WebApplication.Models.ModifyRatingModel
+
+
+@Html.ValidationSummary(true)
+@Html.AntiForgeryToken()
+
+<h2> Your recently rated albums </h2>
+<h2> @Model.CurrentUserId </h2>
+
+@using (Html.BeginForm())
+{
+<div class="form-group">
+
+    <div class="form-group" style="vertical-align:middle; text-align: center;">
+        Chose rating to edit:
+        @Html.DropDownListFor(m => m.ID_rating, WebApplication.Models.ModifyRatingModel.SelectRatedAlbum(Model.CurrentUserId), new { style = "color:black" })
+    </div>
+
+    <div class="form-group" style="vertical-align:middle; text-align: center;">
+        Chose rating to edit:
+        @Html.DropDownListFor(m => m.NewRating, WebApplication.Models.ModifyRatingModel.RateAlbum(), new { style = "color:black" })
+    </div>
+
+    <div class="form-group" style="vertical-align:middle; text-align: center;">
+        <form action="" method="post">
+            <input type="submit" value="Modify" name="action:ModifyRating" style="color:black" />
+            <input type="submit" value="Delete" name="action:DeleteRating" style="color:black" />
+        </form>
+    </div>
+
+</div>
+}
+
+<div class="col-lg-push-5" style="vertical-align:middle; text-align: center;">
+    @ViewBag.Message
+    @Html.ValidationMessage("error")
+</div>

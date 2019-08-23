@@ -123,6 +123,11 @@ namespace WcfService.Logic
             return dataAccess.ReadData_Ratings();
         }
 
+        public Rating[] GetRatings(int id)
+        {
+            return dataAccess.ReadData_Ratings(id);
+        }
+
         public User GetUser(int id)
         {
             return dataAccess.ReadData_User(id);
@@ -154,6 +159,42 @@ namespace WcfService.Logic
                 return "User record was updated.";
             else
                 return "Record was not updated.";
+        }
+
+
+        public string DeleteData_Album(int id)
+        {
+            if(dataAccess.DeleteData_Album(id))
+            {
+                return "Album was deleted";
+            }
+            else
+            {
+                return "Error: album was not deleted";
+            }
+        }
+
+        public string DeleteData_User(int id)
+        {
+            if (dataAccess.DeleteData_User(id))
+            {
+                return "User was deleted";
+            }
+            else
+            {
+                return "Error: user was not deleted";
+            }
+        }
+        public string DeleteData_Rating(int id)
+        {
+            if (dataAccess.DeleteData_Rating(id))
+            {
+                return "Rating was deleted";
+            }
+            else
+            {
+                return "Error: rating was not deleted";
+            }
         }
 
     }

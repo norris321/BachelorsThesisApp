@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication.CustomController;
 using WebApplication.Models;
 using WebApplication.Security;
 
@@ -38,10 +39,40 @@ namespace WebApplication.Controllers
         [HttpPost]
         public ActionResult AddRating(AddRatingModel model)
         {
-            model.User =  User.Identity.Name;
-            string msg =  model.Rate();
+            string msg =  model.Rate(User.Identity.Name);
             ViewBag.Message = msg;
             return View();
+        }
+
+        public ActionResult ModifyRating()
+        {
+            try
+            {
+                //ModifyRatingModel model = new ModifyRatingModel(User.Identity.Name);
+                return View(new ModifyRatingModel(User.Identity.Name));
+            }
+            catch
+            {
+                return View("Index");
+            }
+        }
+
+        [HttpPost]
+        [MultipleButton(Name = "action", Argument = "ModifyRating")]
+        public ActionResult ModifyRating(ModifyRatingModel model)
+        {
+            var msg = model.ModifyRating();
+            ViewBag.Message = msg;
+            return RedirectToAction("ModifyRating", "User");
+        }
+
+        [HttpPost]
+        [MultipleButton(Name = "action", Argument = "DeleteRating")]
+        public ActionResult DeleteRating(ModifyRatingModel model)
+        {
+            var msg = model.DeleteRating();
+            ViewBag.Message = msg;
+            return RedirectToAction("ModifyRating", "User");
         }
     }
 }

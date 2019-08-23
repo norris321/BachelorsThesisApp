@@ -21,10 +21,15 @@ namespace WcfService.Logic
 
         Rating GetRating(int id);
         Rating[] GetRatings();
+        Rating[] GetRatings(int id);
         string AddRating(Rating rating);
 
         string OverrideUser(User user);
         string OverrideRating(Rating rating);
         string OverrideAlbum(Album album);
+
+        string DeleteData_Album(int id);
+        string DeleteData_User(int id);
+        string DeleteData_Rating(int id);
     }
 }

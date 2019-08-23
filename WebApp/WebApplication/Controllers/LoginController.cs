@@ -23,53 +23,58 @@ namespace WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (Membership.ValidateUser(model.Username, model.Password))
-                {
-                    var user = (CustomMembershipUser)Membership.GetUser(model.Username, false);
-                    if (user != null)
-                    {
-                        CustomSerializeModel userModel = new Security.CustomSerializeModel()
-                        {
-                            IdUser = user.UserId,
-                            Username = user.FirstName,
-                            RoleName = user.Roles.Select(r => r.RoleName).ToList()
-                        };
+                var user = AddCookie(model);
 
-                        string userData = JsonConvert.SerializeObject(userModel);
-                        FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket
-                            (
-                            1, model.Username, DateTime.Now, DateTime.Now.AddMinutes(15), false, userData
-                            );
-
-                        string enTicket = FormsAuthentication.Encrypt(authTicket);
-                        HttpCookie faCookie = new HttpCookie("Cookie1", enTicket);
-                        Response.Cookies.Add(faCookie);
-
-                        if(user.Roles.Count == 2)
-                        {
-                            return RedirectToAction("Index", "Admin");
-                        }
-                        else if (user.Roles.Count == 1)
-                        {
-                            return RedirectToAction("Index", "User");
-                        }
-                        else
-                        {
-                            return RedirectToAction("Index", "Home");
-                        }
-
-                    }
-                }
-                else
+                if(user == null)
                 {
                     ViewBag.Message = "Something Wrong : Username or Password invalid";
-                    return View();
-                    //ModelState.AddModelError("", "Something Wrong : Username or Password invalid");
+                    return View(new LoginModel());
+                }
+
+                if (user.Roles.Count == 2)
+                {
+                    return RedirectToAction("Index", "Admin");
+                }
+                else if (user.Roles.Count == 1)
+                {
+                    return RedirectToAction("Index", "User");
                 }
             }
 
-
             return RedirectToAction("Index", "Home");
+        }
+
+        public CustomMembershipUser AddCookie(LoginModel model)
+        {
+            if (Membership.ValidateUser(model.Username, model.Password))
+            {
+                var user = (CustomMembershipUser)Membership.GetUser(model.Username, false);
+                if (user != null)
+                {
+                    CustomSerializeModel userModel = new Security.CustomSerializeModel()
+                    {
+                        IdUser = user.UserId,
+                        Username = user.FirstName,
+                        RoleName = user.Roles.Select(r => r.RoleName).ToList()
+                    };
+
+                    string userData = JsonConvert.SerializeObject(userModel);
+                    FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket
+                        (
+                        1, model.Username, DateTime.Now, DateTime.Now.AddMinutes(15), false, userData
+                        );
+
+                    string enTicket = FormsAuthentication.Encrypt(authTicket);
+                    HttpCookie faCookie = new HttpCookie("Cookie1", enTicket);
+                    Response.Cookies.Add(faCookie);
+                }
+
+                return user;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public ActionResult LogOut()

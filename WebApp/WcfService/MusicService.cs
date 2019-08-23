@@ -15,7 +15,6 @@ namespace WcfService
     {
         public string AddAlbum(AlbumContract album)
         {
-
             MusicProcessor process = new MusicProcessor(new DataAccess());
             return process.AddAlbum(album.ToAlbum());
         }
@@ -88,6 +87,20 @@ namespace WcfService
             return output;
         }
 
+        public RatingContract[] GetRatingsForUser(int id)
+        {
+            var query = new MusicProcessor(new DataAccess());
+
+            var ratings = query.GetRatings(id);
+            RatingContract[] output = new RatingContract[ratings.Length];
+            for (int i = 0; i < ratings.Length; i++)
+            {
+                output[i] = new RatingContract(ratings[i]);
+            }
+
+            return output;
+        }
+
         public UserContract GetUser(int id)
         {
             var query = new MusicProcessor(new DataAccess());
@@ -124,18 +137,24 @@ namespace WcfService
             return query.OverrideAlbum(new Album { IdAlbum = id, ArtistName = newArtistname, AlbumName = newAlbumname});
         }
 
-        public string ModifyRating(int id, int idUser, int idAlbum, int rating)
+        public string ModifyRating(int idRating, int newRating)
         {
-            using (MusicDatabaseEntities entities = new MusicDatabaseEntities())
+            /*using (MusicDatabaseEntities entities = new MusicDatabaseEntities())
             {
-                var album = (from a in entities.Albums where a.IdAlbum == idAlbum select a).SingleOrDefault();
-                var user = (from u in entities.Users where u.IdUser == idUser select u).SingleOrDefault();
+                //var album = (from a in entities.Albums where a.IdAlbum == idAlbum select a).SingleOrDefault();
+                //var user = (from u in entities.Users where u.IdUser == idUser select u).SingleOrDefault();
 
                 Rating modifiedRating = new Rating { Album = album, IdAlbum = idAlbum, IdRating = id, IdUser = idUser, User = user, Rating1 = rating };
 
                 var query = new MusicProcessor(new DataAccess());
                 return query.OverrideRating(modifiedRating);
-            }
+            }*/
+            var query = new MusicProcessor(new DataAccess());
+            var rating = query.GetRating(idRating);
+            Rating modifiedRating = new Rating
+            { Album = rating.Album, IdAlbum = rating.IdAlbum, IdRating = rating.IdRating, IdUser = rating.IdUser, User = rating.User, Rating1 = newRating };
+
+            return query.OverrideRating(modifiedRating);
         }
 
 
@@ -144,6 +163,25 @@ namespace WcfService
             var query = new MusicProcessor(new DataAccess());
             return query.Login(username, password);           
 
+        }
+
+        
+        public string DeleteAlbum(int id)
+        {
+            var query = new MusicProcessor(new DataAccess());
+            return query.DeleteData_Album(id);
+        }
+
+        public string DeleteUser(int id)
+        {
+            var query = new MusicProcessor(new DataAccess());
+            return query.DeleteData_User(id);
+        }
+
+        public string DeleteRating(int id)
+        {
+            var query = new MusicProcessor(new DataAccess());
+            return query.DeleteData_Rating(id);
         }
     }
 }

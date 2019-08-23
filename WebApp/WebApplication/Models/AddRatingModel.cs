@@ -11,7 +11,6 @@ namespace WebApplication.Models
     {
         public string Rating { set; get; }
         public string Album { set; get; }
-        public string User { set; get; }
 
         public static IEnumerable<SelectListItem> RateAlbum()
         {
@@ -41,11 +40,11 @@ namespace WebApplication.Models
             }
         }
 
-        public string Rate()
+        public string Rate(string user)
         {
             using (MusicServiceClient client = new MusicServiceClient())
             {
-                int id = client.GetUserByName(User).IdUser;
+                int id = client.GetUserByName(user).IdUser;
                 return client.AddRating(id, Int32.Parse(Album), Int32.Parse(Rating));
             }
         }

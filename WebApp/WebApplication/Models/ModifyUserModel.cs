@@ -43,11 +43,21 @@ namespace WebApplication.Models
         }
 
 
+        public string Delete()
+        {
+            using (MusicServiceClient client = new MusicServiceClient())
+            {
+                return client.DeleteUser(Id);
+            }
+        }
+
         public static IEnumerable<SelectListItem> ChooseNewUserRating()
         {
             yield return new SelectListItem { Text = "User", Value = "User" };
             yield return new SelectListItem { Text = "Admin", Value = "Admin" };
         }
+
+
 
     }
 }

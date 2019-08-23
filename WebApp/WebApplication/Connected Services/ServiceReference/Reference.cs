@@ -350,6 +350,12 @@ namespace WebApplication.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMusicService/GetRatings", ReplyAction="http://tempuri.org/IMusicService/GetRatingsResponse")]
         System.Threading.Tasks.Task<WebApplication.ServiceReference.RatingContract[]> GetRatingsAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMusicService/GetRatingsForUser", ReplyAction="http://tempuri.org/IMusicService/GetRatingsForUserResponse")]
+        WebApplication.ServiceReference.RatingContract[] GetRatingsForUser(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMusicService/GetRatingsForUser", ReplyAction="http://tempuri.org/IMusicService/GetRatingsForUserResponse")]
+        System.Threading.Tasks.Task<WebApplication.ServiceReference.RatingContract[]> GetRatingsForUserAsync(int id);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMusicService/GetRating", ReplyAction="http://tempuri.org/IMusicService/GetRatingResponse")]
         WebApplication.ServiceReference.RatingContract GetRating(int id);
         
@@ -375,10 +381,28 @@ namespace WebApplication.ServiceReference {
         System.Threading.Tasks.Task<string> ModyifyAlbumAsync(int id, string newArtistname, string newAlbumname);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMusicService/ModifyRating", ReplyAction="http://tempuri.org/IMusicService/ModifyRatingResponse")]
-        string ModifyRating(int id, int idUser, int idAlbum, int rating);
+        string ModifyRating(int idRating, int newRating);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMusicService/ModifyRating", ReplyAction="http://tempuri.org/IMusicService/ModifyRatingResponse")]
-        System.Threading.Tasks.Task<string> ModifyRatingAsync(int id, int idUser, int idAlbum, int rating);
+        System.Threading.Tasks.Task<string> ModifyRatingAsync(int idRating, int newRating);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMusicService/DeleteAlbum", ReplyAction="http://tempuri.org/IMusicService/DeleteAlbumResponse")]
+        string DeleteAlbum(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMusicService/DeleteAlbum", ReplyAction="http://tempuri.org/IMusicService/DeleteAlbumResponse")]
+        System.Threading.Tasks.Task<string> DeleteAlbumAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMusicService/DeleteUser", ReplyAction="http://tempuri.org/IMusicService/DeleteUserResponse")]
+        string DeleteUser(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMusicService/DeleteUser", ReplyAction="http://tempuri.org/IMusicService/DeleteUserResponse")]
+        System.Threading.Tasks.Task<string> DeleteUserAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMusicService/DeleteRating", ReplyAction="http://tempuri.org/IMusicService/DeleteRatingResponse")]
+        string DeleteRating(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMusicService/DeleteRating", ReplyAction="http://tempuri.org/IMusicService/DeleteRatingResponse")]
+        System.Threading.Tasks.Task<string> DeleteRatingAsync(int id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -480,6 +504,14 @@ namespace WebApplication.ServiceReference {
             return base.Channel.GetRatingsAsync();
         }
         
+        public WebApplication.ServiceReference.RatingContract[] GetRatingsForUser(int id) {
+            return base.Channel.GetRatingsForUser(id);
+        }
+        
+        public System.Threading.Tasks.Task<WebApplication.ServiceReference.RatingContract[]> GetRatingsForUserAsync(int id) {
+            return base.Channel.GetRatingsForUserAsync(id);
+        }
+        
         public WebApplication.ServiceReference.RatingContract GetRating(int id) {
             return base.Channel.GetRating(id);
         }
@@ -512,12 +544,36 @@ namespace WebApplication.ServiceReference {
             return base.Channel.ModyifyAlbumAsync(id, newArtistname, newAlbumname);
         }
         
-        public string ModifyRating(int id, int idUser, int idAlbum, int rating) {
-            return base.Channel.ModifyRating(id, idUser, idAlbum, rating);
+        public string ModifyRating(int idRating, int newRating) {
+            return base.Channel.ModifyRating(idRating, newRating);
         }
         
-        public System.Threading.Tasks.Task<string> ModifyRatingAsync(int id, int idUser, int idAlbum, int rating) {
-            return base.Channel.ModifyRatingAsync(id, idUser, idAlbum, rating);
+        public System.Threading.Tasks.Task<string> ModifyRatingAsync(int idRating, int newRating) {
+            return base.Channel.ModifyRatingAsync(idRating, newRating);
+        }
+        
+        public string DeleteAlbum(int id) {
+            return base.Channel.DeleteAlbum(id);
+        }
+        
+        public System.Threading.Tasks.Task<string> DeleteAlbumAsync(int id) {
+            return base.Channel.DeleteAlbumAsync(id);
+        }
+        
+        public string DeleteUser(int id) {
+            return base.Channel.DeleteUser(id);
+        }
+        
+        public System.Threading.Tasks.Task<string> DeleteUserAsync(int id) {
+            return base.Channel.DeleteUserAsync(id);
+        }
+        
+        public string DeleteRating(int id) {
+            return base.Channel.DeleteRating(id);
+        }
+        
+        public System.Threading.Tasks.Task<string> DeleteRatingAsync(int id) {
+            return base.Channel.DeleteRatingAsync(id);
         }
     }
 }

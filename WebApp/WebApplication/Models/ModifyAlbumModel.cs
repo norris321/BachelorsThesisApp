@@ -21,6 +21,14 @@ namespace WebApplication.Models
             }
         }
 
+        public string Delete()
+        {
+            using (MusicServiceClient client = new MusicServiceClient())
+            {
+                return client.DeleteUser(Id);
+            }
+        }
+
         public static IEnumerable<SelectListItem> ChooseAlbum()
         {
             using (MusicServiceClient client = new MusicServiceClient())

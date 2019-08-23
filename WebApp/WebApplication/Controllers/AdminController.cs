@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication.CustomController;
 using WebApplication.Models;
 using WebApplication.Security;
 
@@ -41,12 +42,30 @@ namespace WebApplication.Controllers
             return View(new ModifyAlbumModel());
         }
 
-        [HttpPost]
-        public ActionResult ModifyAlbum(ModifyAlbumModel model)
+        //[HttpPost]
+        /*public ActionResult ModifyAlbum(ModifyAlbumModel model)
         {
             var msg = model.Modify();
             ViewBag.Message = msg;
             return View(new ModifyAlbumModel());
+        }*/
+
+        [HttpPost]
+        [MultipleButton(Name = "action", Argument = "ModifyAlbum")]
+        public ActionResult ModifyAlbum(ModifyAlbumModel model)
+        {
+            var msg = model.Modify();
+            ViewBag.Message = msg;
+            return View("ModifyAlbum");
+        }
+
+        [HttpPost]
+        [MultipleButton(Name = "action", Argument = "DeleteAlbum")]
+        public ActionResult DeleteAlbum(ModifyAlbumModel model)
+        {
+            var msg = model.Delete();
+            ViewBag.Message = msg;
+            return View("ModifyAlbum");
         }
 
         public ActionResult ModifyUser()
@@ -55,12 +74,31 @@ namespace WebApplication.Controllers
         }
 
         [HttpPost]
+        [MultipleButton(Name = "action", Argument = "ModifyUser")]
+        public ActionResult ModifyUser(ModifyUserModel model)
+        {
+            var msg = model.Modify();
+            ViewBag.Message = msg;
+            return View("ModifyUser");
+        }
+
+        [HttpPost]
+        [MultipleButton(Name = "action", Argument = "DeleteUser")]
+        public ActionResult DeleteUser(ModifyAlbumModel model)
+        {
+            var msg = model.Delete();
+            ViewBag.Message = msg;
+            return View("ModifyUser");
+        }
+
+
+        /*[HttpPost]
         public ActionResult ModifyUser(ModifyUserModel model)
         {
             var msg = model.Modify();
             ViewBag.Message = msg;
             return View(new ModifyUserModel());
-        }
+        }*/
 
     }
 }

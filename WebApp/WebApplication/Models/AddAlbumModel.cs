@@ -25,12 +25,12 @@ namespace WebApplication.Models
                     if (NewAlbumName != null && NewArtistName != null)
                         return client.AddAlbum(new ServiceReference.AlbumContract { ArtistName = NewArtistName, AlbumName = NewAlbumName });
                     else
-                        return "Exception";
+                        return "Forms cannot be empty";
                 }
             }
             catch(Exception e)
             {
-                return "Exception";
+                return "Error: No database connection";
             }
         }
     }

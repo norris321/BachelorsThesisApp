@@ -88,6 +88,14 @@ namespace WebApplication.Models
                 }
             }
 
+            public int RatingsCount
+            {
+                get
+                {
+                    return ratings.Count;
+                }
+            }
+
             private List<int?> ratings = new List<int?>();
 
             public RatingModel()

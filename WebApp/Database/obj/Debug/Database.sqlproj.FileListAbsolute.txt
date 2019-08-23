@@ -4,3 +4,13 @@ C:\Programowanie\11_WCF_MVC_localDB\WebApp\Database\bin\Debug\Database.pdb
 C:\Programowanie\11_WCF_MVC_localDB\WebApp\Database\obj\Debug\Database.dll
 C:\Programowanie\11_WCF_MVC_localDB\WebApp\Database\obj\Debug\Database.pdb
 C:\Programowanie\11_WCF_MVC_localDB\WebApp\Database\obj\Debug\Database.sqlprojAssemblyReference.cache
+C:\Programowanie\12_WCF_MVC_localDB\WebApp\Database\bin\Debug\Database.dacpac
+C:\Programowanie\12_WCF_MVC_localDB\WebApp\Database\bin\Debug\Database.dll
+C:\Programowanie\12_WCF_MVC_localDB\WebApp\Database\bin\Debug\Database.pdb
+C:\Programowanie\12_WCF_MVC_localDB\WebApp\Database\obj\Debug\Model.xml
+C:\Programowanie\12_WCF_MVC_localDB\WebApp\Database\obj\Debug\refactor.xml
+C:\Programowanie\12_WCF_MVC_localDB\WebApp\Database\obj\Debug\postdeploy.sql
+C:\Programowanie\12_WCF_MVC_localDB\WebApp\Database\obj\Debug\predeploy.sql
+C:\Programowanie\12_WCF_MVC_localDB\WebApp\Database\obj\Debug\Database.dll
+C:\Programowanie\12_WCF_MVC_localDB\WebApp\Database\obj\Debug\Database.pdb
+C:\Programowanie\12_WCF_MVC_localDB\WebApp\Database\obj\Debug\Database.sqlprojAssemblyReference.cache

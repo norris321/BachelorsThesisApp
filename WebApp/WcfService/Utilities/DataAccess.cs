@@ -105,15 +105,6 @@ namespace WcfService.Utilities
                                  join a in context.Albums on r.IdAlbum equals a.IdAlbum
                                  join u in context.Users on r.IdUser equals u.IdUser
                                  select r).ToList();
-                    /*var query = (from r in context.Ratings
-                                 join a in context.Albums on r.IdAlbum equals a.IdAlbum
-                                 join u in context.Users on r.IdUser equals u.IdUser
-                                 group a by a.IdAlbum into grp
-                                 select new 
-                                 {
-                                     IdAlbum = grp.Key,
-                                     Average
-                                 } ).ToList();*/
 
                     Rating[] output = new Rating[query.Count];
 
@@ -378,6 +369,100 @@ namespace WcfService.Utilities
                 catch (Exception)
                 {
                     return false;
+                }
+            }
+        }
+
+        public bool DeleteData_Album(int id)
+        {
+            using (var context = new MusicDatabaseEntities())
+            {
+                try
+                {
+                    var album = context.Albums.Find(id);
+                    context.Entry(album).State = System.Data.Entity.EntityState.Deleted;
+                    context.SaveChanges();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+        }
+
+        public bool DeleteData_User(int id)
+        {
+            using (var context = new MusicDatabaseEntities())
+            {
+                try
+                {
+                    var user = context.Users.Find(id);
+                    context.Entry(user).State = System.Data.Entity.EntityState.Deleted;
+                    context.SaveChanges();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+        }
+
+        public bool DeleteData_Rating(int id)
+        {
+            using (var context = new MusicDatabaseEntities())
+            {
+                try
+                {
+                    var rating = context.Ratings.Find(id);
+                    context.Entry(rating).State = System.Data.Entity.EntityState.Deleted;
+                    context.SaveChanges();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+        }
+
+        public Rating[] ReadData_Ratings(int IdUser)
+        {
+            using (var context = new MusicDatabaseEntities())
+            {
+                try
+                {
+                    var query = (from r in context.Ratings
+                                 join a in context.Albums on r.IdAlbum equals a.IdAlbum
+                                 join u in context.Users on r.IdUser equals u.IdUser
+                                 where r.IdUser == IdUser
+                                 select r).ToList();
+
+                    if (query.Count == 0)
+                        return null;
+
+                    Rating[] output = new Rating[query.Count];
+
+                    for (int i = 0; i < query.Count; i++)
+                    {
+                        output[i] = new Rating
+                        {
+                            Album = query[i].Album,
+                            IdAlbum = query[i].IdAlbum,
+                            User = query[i].User,
+                            IdUser = query[i].IdUser,
+                            IdRating = query[i].IdRating,
+                            Rating1 = query[i].Rating1
+                        };
+                    }
+
+
+                    return output;
+                }
+                catch (Exception e)
+                {
+                    return null;
                 }
             }
         }

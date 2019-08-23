@@ -40,6 +40,9 @@ namespace WcfService
         RatingContract[] GetRatings();
 
         [OperationContract]
+        RatingContract[] GetRatingsForUser(int id);
+
+        [OperationContract]
         RatingContract GetRating(int id);
 
         [OperationContract]
@@ -52,10 +55,16 @@ namespace WcfService
         string ModyifyAlbum(int id, string newArtistname, string newAlbumname);
 
         [OperationContract]
-        string ModifyRating(int id, int idUser,int idAlbum, int rating);
+        string ModifyRating(int idRating, int newRating);
 
-        //[OperationContract]
-        //void Test();
+        [OperationContract]
+        string DeleteAlbum(int id);
+
+        [OperationContract]
+        string DeleteUser(int id);
+
+        [OperationContract]
+        string DeleteRating(int id);
 
     }
 
