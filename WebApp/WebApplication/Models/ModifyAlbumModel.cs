@@ -25,7 +25,7 @@ namespace WebApplication.Models
         {
             using (MusicServiceClient client = new MusicServiceClient())
             {
-                return client.DeleteUser(Id);
+                return client.DeleteAlbum(Id);
             }
         }
 

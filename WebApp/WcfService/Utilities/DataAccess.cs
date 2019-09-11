@@ -15,16 +15,42 @@ namespace WcfService.Utilities
             {
                 try
                 {
-                    var query = (from a in context.Albums where a.IdAlbum == id select a).SingleOrDefault();
-                    if (query == null)
-                        return new Album();
+                    var checkIfAlbumExists = (from a in context.Albums where a.IdAlbum == id select a).SingleOrDefault();
 
-                    Album output = new Album { ArtistName = query.ArtistName, AlbumName = query.AlbumName, IdAlbum = query.IdAlbum };
+                    if (checkIfAlbumExists == null)
+                        return null;
+
+                    Album output = new Album
+                    { ArtistName = checkIfAlbumExists.ArtistName, AlbumName = checkIfAlbumExists.AlbumName, IdAlbum = checkIfAlbumExists.IdAlbum };
+
                     return output;
                 }
                 catch(Exception)
                 {
-                    return new Album();
+                    return null;
+                }
+            }
+        }
+
+        public Album ReadData_Album(string artistName, string albumName)
+        {
+            using (var context = new MusicDatabaseEntities())
+            {
+                try
+                {
+                    var checkIfAlbumExists = (from a in context.Albums where a.ArtistName == artistName && a.AlbumName == albumName select a).SingleOrDefault();
+
+                    if (checkIfAlbumExists == null)
+                        return null;
+
+                    Album output = new Album
+                    { ArtistName = checkIfAlbumExists.ArtistName, AlbumName = checkIfAlbumExists.AlbumName, IdAlbum = checkIfAlbumExists.IdAlbum };
+
+                    return output;
+                }
+                catch (Exception)
+                {
+                    return null;
                 }
             }
         }
@@ -51,10 +77,10 @@ namespace WcfService.Utilities
             {
                 try
                 {
-                    var checkRating = (from a in context.Ratings where a.IdRating == id select a).SingleOrDefault();
-                    if (checkRating == null)
+                    var checkIfRatingExists = (from a in context.Ratings where a.IdRating == id select a).SingleOrDefault();
+                    if (checkIfRatingExists == null)
                     {
-                        return new Rating
+                        /*return new Rating
                         {
                             Album = new Album(),
                             IdAlbum = 0,
@@ -62,7 +88,8 @@ namespace WcfService.Utilities
                             IdUser =0,
                             IdRating = 0,
                             Rating1 = 0
-                        };
+                        };*/
+                        return null;
                     }
                     else
                     {
@@ -104,11 +131,11 @@ namespace WcfService.Utilities
                     var query = (from r in context.Ratings
                                  join a in context.Albums on r.IdAlbum equals a.IdAlbum
                                  join u in context.Users on r.IdUser equals u.IdUser
-                                 select r).ToList();
+                                 select r).ToArray();
 
-                    Rating[] output = new Rating[query.Count];
+                    Rating[] output = new Rating[query.Length];
 
-                    for(int i = 0; i < query.Count;i++)
+                    for(int i = 0; i < query.Length; i++)
                     {
                         output[i] = new Rating
                         {
@@ -137,11 +164,13 @@ namespace WcfService.Utilities
             {
                 try
                 {
-                    var query = (from u in context.Users where u.IdUser == id select u).SingleOrDefault();
-                    if (query == null)
-                        return new User();
+                    var checkIfUserExists = (from u in context.Users where u.IdUser == id select u).SingleOrDefault();
 
-                    User output = new User { IdUser = query.IdUser, Username = query.Username, Password = query.Password, Rank = query.Rank };
+                    if (checkIfUserExists == null)
+                        return null;
+
+                    User output = new User { IdUser = checkIfUserExists.IdUser, Username = checkIfUserExists.Username, Password = checkIfUserExists.Password, Rank = checkIfUserExists.Rank };
+
                     return output;
                 }
                 catch (Exception)
@@ -157,13 +186,15 @@ namespace WcfService.Utilities
             {
                 try
                 {
-                    var query = (from u in context.Users where u.Username == username 
+                    var checkIfUserExists = (from u in context.Users where u.Username == username 
                                  && u.Password == password
                                  select u).SingleOrDefault();
-                    if (query == null)
-                        return new User();
 
-                    User output = new User { IdUser = query.IdUser, Username = query.Username, Password = query.Password, Rank = query.Rank };
+                    if (checkIfUserExists == null)
+                        return null;
+
+                    User output = new User { IdUser = checkIfUserExists.IdUser, Username = checkIfUserExists.Username, Password = checkIfUserExists.Password, Rank = checkIfUserExists.Rank };
+
                     return output;
                 }
                 catch (Exception)
@@ -179,13 +210,15 @@ namespace WcfService.Utilities
             {
                 try
                 {
-                    var query = (from u in context.Users
+                    var checkIfUserExists = (from u in context.Users
                                  where u.Username == username
                                  select u).SingleOrDefault();
-                    if (query == null)
-                        return new User();
 
-                    User output = new User { IdUser = query.IdUser, Username = query.Username, Password = query.Password, Rank = query.Rank };
+                    if (checkIfUserExists == null)
+                        return null;
+
+                    User output = new User { IdUser = checkIfUserExists.IdUser, Username = checkIfUserExists.Username, Password = checkIfUserExists.Password, Rank = checkIfUserExists.Rank };
+
                     return output;
                 }
                 catch (Exception)
@@ -466,5 +499,6 @@ namespace WcfService.Utilities
                 }
             }
         }
+
     }
 }

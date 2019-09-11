@@ -9,6 +9,7 @@ namespace WcfService.Utilities
     public interface IDataAccess
     {
         Album ReadData_Album(int id);
+        Album ReadData_Album(string artistName, string albumName);
         Album[] ReadData_Albums();
         bool SaveData_Album(Album album);
 

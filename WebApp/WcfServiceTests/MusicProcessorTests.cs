@@ -11,79 +11,6 @@ using WcfService.DataContracts;
 
 namespace WcfServiceTests
 {
-   
-
-
-    public static class TestData
-    {
-        public static List<Album> SampleAlbumData(int sampleSize)
-        {
-            var data = new List<Album>();
-            for (int i = 1; i <= sampleSize; i++)
-            {
-                data.Add(new Album
-                {
-                    ArtistName = "Artist" + i.ToString(),
-                    AlbumName = "Album" + i.ToString(),
-                    IdAlbum = i
-                });
-            }
-
-            return data;
-        }
-
-
-
-        public static List<User> SampleUserData(int sampleSize)
-        {
-            var data = new List<User>();
-            for (int i = 1; i <= sampleSize; i++)
-            {
-                data.Add(new User
-                {
-                    Username = "user" + i.ToString(),
-                    Password = "password" + i.ToString(),
-                    Rank = "rank" + i.ToString(),
-                    IdUser = i
-                });
-            }
-
-            return data;
-        }
-
-        public static List<Rating> SampleRatingData(int sampleSize)
-        {
-            var data = new List<Rating>();
-            for (int i = 1; i <= sampleSize; i++)
-            {
-                var album = new Album { IdAlbum = i, AlbumName = "album" + i.ToString(), ArtistName = "artist" + i.ToString() };
-                var user = new User
-                {
-                    Username = "user" + i.ToString(),
-                    Password = "Password" + i.ToString(),
-                    Rank = "rank" + i.ToString(),
-                    IdUser = i
-                };
-
-                data.Add(new Rating { Album = album, User = user, Rating1 = i });
-            }
-
-
-            return data;
-        }
-
-        static char[] SampleString(int length)
-        {
-            char[] output = new char[length];
-            for (int i = 0; i < length; i++)
-            {
-                output[i] = 't';
-            }
-
-            return output;
-        }
-
-    }
 
     [TestFixture]
     class LoginTest
@@ -329,13 +256,36 @@ namespace WcfServiceTests
             }
         }
 
-        [TestCase(1, "", "aaa", ExpectedResult = "Artist name needs to have between 3 and 30 characters.")]
-        [TestCase(1, "bbb", "", ExpectedResult = "Album name needs to have between 3 and 30 characters.")]
-        [TestCase(1, "d", "c", ExpectedResult = "Artist name and Album name need to have between 3 and 30 characters.")]
+        /*[Test]
+        public void AddAlbum_AlbumWasAddedBefore()
+        {
+            using (var mock = AutoMock.GetLoose())
+            {
+                //Arrange
+                var album = TestData.SampleAlbumData(1)[0];
+                //mock.Mock<IDataAccess>().Setup(x => x.SaveData_Album(album)).Returns(true);
+                mock.Mock<IDataAccess>().Setup(x => x.ReadData_Album(It.IsAny<string>(), It.IsAny<string>())).Returns(album);
+                var cls = mock.Create<MusicProcessor>();
+                //Act
+                var actual = cls.AddAlbum(album);
+                var expected = "Album is added already.";
+                //Assert
+                Assert.AreEqual(expected, actual);
+                mock.Mock<IDataAccess>().Verify(x => x.SaveData_Album(album), Times.Exactly(1));
+            }
+        }*/
+
+        [TestCase(1, "b", "a", ExpectedResult = "Artist and album name need to have between 3 and 30 characters.")]
+        [TestCase(1, TestData.SampleString_Above30Characters, "abc", ExpectedResult = "Artist and album name need to have between 3 and 30 characters.")]
+        [TestCase(1, "abc", TestData.SampleString_Above30Characters, ExpectedResult = "Artist and album name need to have between 3 and 30 characters.")]
+        [TestCase(1, "", "aaa", ExpectedResult = "Input forms cannont be empty")]
+        [TestCase(1, "bbb", "", ExpectedResult = "Input forms cannont be empty")]
+        [TestCase(1, "", "", ExpectedResult = "Input forms cannont be empty")]
         //[TestCase(1, "dder", "cfgh", ExpectedResult = "Album added")]
-        public string AddAlbum(int id, string artist, string album)
+        public string AddAlbumWrongInputs(int id, string artist, string album)
         {
             MusicService service = new MusicService();
+            //Mock mock = new Mock<IDataAccess>().Setup(x => x.SaveData_User(It.IsAny<User>())).Returns(true);
             var testAlbum = new AlbumContract { IdAlbum = id, ArtistName = artist, AlbumName = album };
             string result = service.AddAlbum(testAlbum);
 
@@ -365,11 +315,31 @@ namespace WcfServiceTests
             }
         }
 
+        /*[Test]
+        public void AddUser_InvalidCallAlbumIs()
+        {
+            using (var mock = AutoMock.GetLoose())
+            {
+                //Arrange
+                var user = TestData.SampleUserData(1)[0];
+                mock.Mock<IDataAccess>().Setup(x => x.SaveData_User(user)).Returns(true);
+                var cls = mock.Create<MusicProcessor>();
+                //Act
+                var actual = cls.AddUser(user);
+                var expected = "User added.";
+                //Assert
+                Assert.AreEqual(expected, actual);
+                mock.Mock<IDataAccess>().Verify(x => x.SaveData_User(user), Times.Exactly(1));
+            }
+        }*/
 
 
-        [TestCase(1, "", "aaa", ExpectedResult = "User name needs to have between 3 and 30 characters.")]
-        [TestCase(1, "bbb", "", ExpectedResult = "Password needs to have between 3 and 30 characters.")]
-        [TestCase(1, "d", "c", ExpectedResult = "User name and password need to have between 3 and 30 characters.")]
+        [TestCase(1, "", "aaa", ExpectedResult = "Input forms cannont be empty.")]
+        [TestCase(1, "bbb", "", ExpectedResult = "Input forms cannont be empty.")]
+        [TestCase(1, "d", "c", ExpectedResult = "User name needs to have between 3 and 30 characters.")]
+        [TestCase(1, TestData.SampleString_Above30Characters, "abcd", ExpectedResult = "User name needs to have between 3 and 30 characters.")]
+        [TestCase(1, "abc", "c", ExpectedResult = "Password needs to have between 3 and 30 characters.")]
+        [TestCase(1, "abc", TestData.SampleString_Above30Characters, ExpectedResult = "Password needs to have between 3 and 30 characters.")]
         public string AddUser(int id, string username, string password)
         {
             MusicService service = new MusicService();
@@ -404,9 +374,27 @@ namespace WcfServiceTests
             }
         }
 
+        [Test]
+        public void AddRating_AlbumOrUserNotFoundInDB()
+        {
+            //Arrange
+            Mock<IDataAccess> mock = new Mock<IDataAccess>();
+            mock.Setup(x => x.ReadData_User(It.IsAny<int>())).Returns((User)null);
+            mock.Setup(x => x.ReadData_Album(It.IsAny<int>())).Returns((Album)null);
+            var cls = new MusicProcessor(mock.Object);
+            //act
+            Rating testRating = new Rating { IdAlbum = 1, IdUser = 1 };
+            string actual = cls.AddRating(testRating);
+            string expected = "Error: album or user record not found.";
+            //
+            mock.Verify(x => x.ReadData_User(It.IsAny<int>()), Times.Exactly(1));
+            mock.Verify(x => x.ReadData_Album(It.IsAny<int>()), Times.Exactly(1));
+            Assert.AreEqual(expected, actual);
+        }
+
         [TestCase(1, 1, 0, ExpectedResult = "Rating needs to be between 1 - 10 range.")]
         [TestCase(1, 1, 11, ExpectedResult = "Rating needs to be between 1 - 10 range.")]
-        public string AddRating(int idUser, int idAlbum, int rating)
+        public string AddRating_WrongRatingSize(int idUser, int idAlbum, int rating)
         {
             MusicService service = new MusicService();
 

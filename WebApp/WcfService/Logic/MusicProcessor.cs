@@ -32,30 +32,26 @@ namespace WcfService.Logic
 
         public string AddAlbum(Album album)
         {
-            string output = null;
-            if (album.ArtistName.Length > 30 || album.ArtistName.Length < 3 || album.ArtistName == null)
+            if (String.IsNullOrEmpty(album.ArtistName)  || String.IsNullOrEmpty(album.AlbumName))
             {
-                output = "Artist name needs to have between 3 and 30 characters.";
+                return "Input forms cannont be empty";
             }
-
-            if (album.AlbumName.Length > 30 || album.AlbumName.Length < 3 || album.AlbumName == null)
+            else if (album.ArtistName.Length > 30 || album.ArtistName.Length < 3 || album.AlbumName.Length > 30 || album.AlbumName.Length < 3)
             {
-                if (string.IsNullOrEmpty(output))
-                    output = "Album name needs to have between 3 and 30 characters.";
-                else
-                    output = "Artist name and Album name need to have between 3 and 30 characters.";
+                return "Artist and album name need to have between 3 and 30 characters.";
             }
-
-            if (!string.IsNullOrEmpty(output))
+            else if (dataAccess.ReadData_Album(album.ArtistName, album.AlbumName) != null)
             {
-                return output;
+                return "Album is added already.";
             }
-
-
-            if (dataAccess.SaveData_Album(album))
+            else if (dataAccess.SaveData_Album(album))
+            {
                 return "Album added.";
+            }
             else
+            {
                 return "Error";
+            }
         }
 
         public string AddRating(Rating rating)
@@ -65,10 +61,11 @@ namespace WcfService.Logic
                 return "Rating needs to be between 1 - 10 range.";
             }
 
-            var user = GetUser(rating.IdUser);
-            var album = GetAlbum(rating.IdAlbum);
+            var user = dataAccess.ReadData_User(rating.IdUser);
+            var album = dataAccess.ReadData_Album(rating.IdAlbum);
+
             if (user == null || album == null)
-                return "False.";
+                return "Error: album or user record not found.";
 
             if(dataAccess.SaveData_Rating(rating))
                 return "Rating added.";
@@ -78,29 +75,26 @@ namespace WcfService.Logic
 
         public string AddUser(User user)
         {
-            string output = null;
-            if (user.Username.Length > 30 || user.Username.Length < 3 || user.Username == null)
+            if ( string.IsNullOrEmpty(user.Username) || String.IsNullOrEmpty(user.Password))
             {
-                output = "User name needs to have between 3 and 30 characters.";
+                return "Input forms cannont be empty.";
             }
-
-            if (user.Password.Length > 30 || user.Password.Length < 3 || user.Password == null)
+            else if (user.Username.Length < 3 || user.Username.Length > 30)
             {
-                if (string.IsNullOrEmpty(output))
-                    output = "Password needs to have between 3 and 30 characters.";
-                else
-                    output = "User name and password need to have between 3 and 30 characters.";
+                return "User name needs to have between 3 and 30 characters.";
             }
-
-            if (!string.IsNullOrEmpty(output))
+            else if (user.Password.Length > 30 || user.Password.Length < 3)
             {
-                return output;
+                return "Password needs to have between 3 and 30 characters.";
             }
-
-            if (dataAccess.SaveData_User(user))
+            else if (dataAccess.SaveData_User(user))
+            {
                 return "User added.";
+            }
             else
+            {
                 return "Error.";
+            }
         }
 
         public Album GetAlbum(int id)

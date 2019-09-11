@@ -18,11 +18,10 @@ namespace WebApplication.Models
         public string Password { set; get; }
 
 
-
-        //[System.Diagnostics.Conditional("DEBUG")]
-        public static void DebugLogIn()
+        /*[System.Diagnostics.Conditional("DEBUG")]
+        public static void DebugLogIn(string rank)
         {
-
-        }
+            Controllers.LoginController
+        }*/
     }
 }

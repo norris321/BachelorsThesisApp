@@ -24,10 +24,12 @@ namespace WcfService.DataContracts
 
         public UserContract(User user)
         {
-            IdUser = user.IdUser;
-            Username = user.Username;
-            //Password = user.Password;
-            Rank = user.Rank;
+            if (user != null)
+            {
+                IdUser = user.IdUser;
+                Username = user.Username;
+                Rank = user.Rank;
+            }
         }
 
         public UserContract()

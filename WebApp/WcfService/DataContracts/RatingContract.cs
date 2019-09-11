@@ -30,12 +30,15 @@ namespace WcfService.DataContracts
 
         public RatingContract(Rating rating)
         {
-            IdAlbum = rating.IdAlbum;
-            IdRating = rating.IdRating;
-            IdUser = rating.IdUser;
-            ArtistName = rating.Album.ArtistName;
-            AlbumName = rating.Album.AlbumName;
-            Rating = rating.Rating1;
+            if(rating != null)
+            { 
+                IdAlbum = rating.IdAlbum;
+                IdRating = rating.IdRating;
+                IdUser = rating.IdUser;
+                ArtistName = rating.Album.ArtistName;
+                AlbumName = rating.Album.AlbumName;
+                Rating = rating.Rating1;
+            }
         }
 
         public RatingContract()

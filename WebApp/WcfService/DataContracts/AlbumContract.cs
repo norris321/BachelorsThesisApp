@@ -21,9 +21,18 @@ namespace WcfService.DataContracts
 
         public AlbumContract(Album album)
         {
-            IdAlbum = album.IdAlbum;
-            ArtistName = album.ArtistName;
-            AlbumName = album.AlbumName;
+            if (album == null)
+            {
+                IdAlbum = 0;
+                AlbumName = null;
+                ArtistName = null;
+            }
+            else
+            {
+                IdAlbum = album.IdAlbum;
+                ArtistName = album.ArtistName;
+                AlbumName = album.AlbumName;
+            }
         }
 
         public AlbumContract()
