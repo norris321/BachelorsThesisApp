@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MusicDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MusicDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Album">
           <Key>
             <PropertyRef Name="IdAlbum" />
@@ -28,11 +28,14 @@
           </Key>
           <Property Name="IdUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Username" Type="nvarchar" MaxLength="30" />
-          <Property Name="Password" Type="varchar" MaxLength="16" />
+          <Property Name="Password" Type="varchar" MaxLength="40" />
           <Property Name="Rank" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="UserGuid" Type="uniqueidentifier" />
         </EntityType>
         <Association Name="FK_Ratings_Album">
-          <End Role="Album" Type="Self.Album" Multiplicity="1" />
+          <End Role="Album" Type="Self.Album" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Ratings" Type="Self.Ratings" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Album">
@@ -44,7 +47,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Ratings_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Ratings" Type="Self.Ratings" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -68,8 +73,7 @@
             <End Role="Ratings" EntitySet="Ratings" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MusicDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -99,9 +103,10 @@
           </Key>
           <Property Name="IdUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Username" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="Rank" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Ratings" Relationship="Self.FK_Ratings_User" FromRole="User" ToRole="Ratings" />
+          <Property Name="UserGuid" Type="Guid" />
         </EntityType>
         <Association Name="FK_Ratings_Album">
           <End Role="Album" Type="Self.Album" Multiplicity="1" />
@@ -168,6 +173,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="MusicDatabaseModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserGuid" ColumnName="UserGuid" />
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Password" ColumnName="Password" />

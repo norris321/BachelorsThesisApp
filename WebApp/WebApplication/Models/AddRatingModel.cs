@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WebApplication.ServiceReference;
+using WebApplication.WcfServiceReference;
+using WebApplication.ServicesConnections;
 
 namespace WebApplication.Models
 {
@@ -22,31 +23,42 @@ namespace WebApplication.Models
 
         public static IEnumerable<SelectListItem> ChooseAlbum()
         {
-            using (MusicServiceClient client = new MusicServiceClient())
+            AccessWcfService service = new AccessWcfService("GetAlbums", "GET");
+            string userJsonData = service.GetJsonFromService();
+            AlbumContract[] albums = Newtonsoft.Json.JsonConvert.DeserializeObject<AlbumContract[]>(userJsonData);
+
+            if (albums == null)
             {
-               var albums = client.GetAlbums();
-                if (albums == null)
+                yield return new SelectListItem { Text = "null", Value = "null" };
+            }
+            else
+            {
+                foreach (AlbumContract a in albums)
                 {
-                    yield return new SelectListItem { Text = "null", Value = "null" };
-                }
-                else
-                {
-                    foreach(AlbumContract a in albums)
-                    {
-                        yield return new SelectListItem
-                        { Text = a.ArtistName + " " + a.AlbumName, Value = a.IdAlbum.ToString() };
-                    }
+                    yield return new SelectListItem
+                    { Text = a.ArtistName + " " + a.AlbumName, Value = a.IdAlbum.ToString() };
                 }
             }
+
+
         }
 
         public string Rate(string user)
         {
-            using (MusicServiceClient client = new MusicServiceClient())
-            {
-                int id = client.GetUserByName(user).IdUser;
-                return client.AddRating(id, Int32.Parse(Album), Int32.Parse(Rating));
-            }
+
+            AccessWcfService getUserId = new AccessWcfService("GetUserByName", "GET", user);
+            string userJsonData = getUserId.GetJsonFromService();
+            int idUser = Newtonsoft.Json.JsonConvert.DeserializeObject<UserContract>(userJsonData).IdUser;
+
+            AccessWcfService getAlbumId = new AccessWcfService("GetAlbum", "GET", Album);
+            string albumJsonData = getAlbumId.GetJsonFromService();
+            int idAlbum = Newtonsoft.Json.JsonConvert.DeserializeObject<AlbumContract>(albumJsonData).IdAlbum;
+
+            AccessWcfService serviceAddUser = new AccessWcfService("AddRating", "POST");
+            RatingContract rating = new RatingContract { IdUser = idUser, IdAlbum = idAlbum, Rating = Int32.Parse(Rating) };
+            string returnMessage = serviceAddUser.SendJsonToService(rating);
+
+            return returnMessage;
         }
 
     }

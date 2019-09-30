@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WebApplication.ServiceReference;
+//using WebApplication.ServiceReference;
+using WebApplication.WcfServiceReference;
+using WebApplication.ServicesConnections;
 
 namespace WebApplication.Models
 {
@@ -15,38 +17,41 @@ namespace WebApplication.Models
 
         public string Modify()
         {
-            using (MusicServiceClient client = new MusicServiceClient())
-            {
-                return client.ModyifyAlbum(Id,NewArtistName,NewAlbumName);
-            }
+            AccessWcfService service = new AccessWcfService("ModifyAlbum", "PUT");
+            AlbumContract album = new AlbumContract { IdAlbum = Id, AlbumName = NewAlbumName, ArtistName = NewArtistName };
+            string inputJson = Newtonsoft.Json.JsonConvert.SerializeObject(album);
+
+            string returnJson = service.SendJsonToService(inputJson);
+            return returnJson;
         }
 
         public string Delete()
         {
-            using (MusicServiceClient client = new MusicServiceClient())
-            {
-                return client.DeleteAlbum(Id);
-            }
+            AccessWcfService service = new AccessWcfService("DeleteAlbum", "DELETE");
+            string inputJson = Newtonsoft.Json.JsonConvert.SerializeObject(Id);
+            string returnJson = service.SendJsonToService(inputJson);
+            return returnJson;
         }
 
         public static IEnumerable<SelectListItem> ChooseAlbum()
         {
-            using (MusicServiceClient client = new MusicServiceClient())
+            AccessWcfService service = new AccessWcfService("GetAlbums", "GET");
+            string json = service.GetJsonFromService();
+            AlbumContract[] albums = Newtonsoft.Json.JsonConvert.DeserializeObject<AlbumContract[]>(json);
+
+            if (albums == null)
             {
-                var albums = client.GetAlbums();
-                if (albums == null)
+                yield return new SelectListItem { Text = "null", Value = "null" };
+            }
+            else
+            {
+                foreach (AlbumContract a in albums)
                 {
-                    yield return new SelectListItem { Text = "null", Value = "null" };
-                }
-                else
-                {
-                    foreach (AlbumContract a in albums)
-                    {
-                        yield return new SelectListItem
-                        { Text = a.ArtistName + " " + a.AlbumName, Value = a.IdAlbum.ToString() };
-                    }
+                    yield return new SelectListItem
+                    { Text = a.ArtistName + " " + a.AlbumName, Value = a.IdAlbum.ToString() };
                 }
             }
+
         }
     }
 }

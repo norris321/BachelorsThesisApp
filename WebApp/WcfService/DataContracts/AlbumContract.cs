@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace WcfService.DataContracts
 {
     [DataContract]
-    public class AlbumContract
+    public class AlbumContract : IAlbumContract
     {
         [DataMember]
         public int IdAlbum { set; get; }
@@ -21,18 +21,13 @@ namespace WcfService.DataContracts
 
         public AlbumContract(Album album)
         {
-            if (album == null)
-            {
-                IdAlbum = 0;
-                AlbumName = null;
-                ArtistName = null;
-            }
-            else
+            if (album != null)
             {
                 IdAlbum = album.IdAlbum;
-                ArtistName = album.ArtistName;
                 AlbumName = album.AlbumName;
+                ArtistName = album.ArtistName;
             }
+ 
         }
 
         public AlbumContract()

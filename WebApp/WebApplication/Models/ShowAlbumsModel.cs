@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using WebApplication.ServiceReference;
+using WebApplication.ServicesConnections;
+using WebApplication.WcfServiceReference;
 
 namespace WebApplication.Models
 {
@@ -14,10 +15,9 @@ namespace WebApplication.Models
         {
             try
             {
-                using (ServiceReference.MusicServiceClient client = new MusicServiceClient())
-                {
-                    albums = client.GetAlbums();
-                }
+                AccessWcfService service = new AccessWcfService("GetAlbums", "GET");
+                string json = service.GetJsonFromService();
+                albums = Newtonsoft.Json.JsonConvert.DeserializeObject<AlbumContract[]>(json); 
             }
             catch(Exception e)
             {

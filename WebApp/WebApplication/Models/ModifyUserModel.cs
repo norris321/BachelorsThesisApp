@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WebApplication.ServiceReference;
+using WebApplication.WcfServiceReference;
+using WebApplication.ServicesConnections;
+using Newtonsoft.Json;
 
 namespace WebApplication.Models
 {
@@ -16,39 +18,41 @@ namespace WebApplication.Models
 
         public string Modify()
         {
-            using (MusicServiceClient client = new MusicServiceClient())
-            {
-                return client.ModifyUser(Id, NewUserName, NewPassword, NewRank);
-            }
+            AccessWcfService service = new AccessWcfService("ModifyUser", "PUT");
+            UserLoginContract user = new UserLoginContract { Username = NewUserName, Rank = NewRank, Password = NewPassword, ID = Id};
+            string inputJson = JsonConvert.SerializeObject(user);
+            string returnJson = service.SendJsonToService(inputJson);
+            return returnJson;
         }
 
         public static IEnumerable<SelectListItem> SelectUser()
         {
-            using (MusicServiceClient client = new MusicServiceClient())
+            AccessWcfService service = new AccessWcfService("GetUsers", "GET");
+            var json = service.GetJsonFromService();
+            var users = JsonConvert.DeserializeObject<UserContract[]>(json);
+
+            if (users == null)
             {
-                var users = client.GetUsers();
-                if (users == null)
+                yield return new SelectListItem { Text = "null", Value = "null" };
+            }
+            else
+            {
+                foreach (UserContract u in users)
                 {
-                    yield return new SelectListItem { Text = "null", Value = "null" };
-                }
-                else
-                {
-                    foreach (UserContract u in users)
-                    {
-                        yield return new SelectListItem
-                        { Text = u.Username , Value = u.IdUser.ToString() };
-                    }
+                    yield return new SelectListItem
+                    { Text = u.Username, Value = u.IdUser.ToString() };
                 }
             }
+
         }
 
 
         public string Delete()
         {
-            using (MusicServiceClient client = new MusicServiceClient())
-            {
-                return client.DeleteUser(Id);
-            }
+            AccessWcfService service = new AccessWcfService("DeleteUser", "DELETE");
+            string inputJson = JsonConvert.SerializeObject(Id);
+            string returnJson = service.SendJsonToService(inputJson);
+            return returnJson;
         }
 
         public static IEnumerable<SelectListItem> ChooseNewUserRating()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
+using WebApplication.ServicesConnections;
 
 namespace WebApplication.Security
 {
@@ -15,13 +16,17 @@ namespace WebApplication.Security
                 return false;
             }
 
-            using (var client = new ServiceReference.MusicServiceClient())
-            {
-                var user = client.Login(username, password);
+            AccessWcfService service = new AccessWcfService("Login", "POST");
 
-                return (user.Username != null) ? true : false;
-            }
+            string jsonString = service.SendJsonToService
+                (new WcfServiceReference.UserLoginContract {Username = username, Password = password });
+
+            WcfServiceReference.UserLoginContract user =
+            Newtonsoft.Json.JsonConvert.DeserializeObject<WcfServiceReference.UserLoginContract>(jsonString);
+
+            return (user.Username != null) ? true : false;
         }
+
 
         public override MembershipUser CreateUser(string username, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey, out MembershipCreateStatus status)
         {
@@ -30,34 +35,30 @@ namespace WebApplication.Security
 
         public override MembershipUser GetUser(string username, bool userIsOnline)
         {
-            using (ServiceReference.MusicServiceClient client = new ServiceReference.MusicServiceClient())
+
+            AccessWcfService service = new AccessWcfService("GetUserByName", "GET", username);
+
+            string jsonString = service.GetJsonFromService();
+
+            WcfServiceReference.UserContract user =
+            Newtonsoft.Json.JsonConvert.DeserializeObject<WcfServiceReference.UserContract>(jsonString);
+
+            if (user.Username == null)
             {
-                var user = client.GetUserByName(username);
-
-                if (user.Username == null)
-                {
-                    return null;
-                }
-                var rank = new List<RoleModel>();
-                rank.Add(new RoleModel(user.Rank));
-
-                var selectedUser = new CustomMembershipUser(user);
-                //var selectedUser = new CustomMembershipUser(
-                //   new LoggedUser { Username = user.Username, UserId = user.IdUser, Roles = rank });
-                return selectedUser;
+                return null;
             }
+            var rank = new List<RoleModel>();
+            rank.Add(new RoleModel(user.Rank));
+
+
+            var selectedUser = new CustomMembershipUser(user);
+
+            return selectedUser;
         }
 
         public override string GetUserNameByEmail(string email)
         {
-            /*using (AuthenticationDB dbContext = new DataAccess.AuthenticationDB())
-            {
-                string username = (from u in dbContext.Users
-                                   where string.Compare(email, u.Email) == 0
-                                   select u.Username).FirstOrDefault();
 
-                return !string.IsNullOrEmpty(username) ? username : string.Empty;
-            }*/
             throw new NotImplementedException();
         }
 

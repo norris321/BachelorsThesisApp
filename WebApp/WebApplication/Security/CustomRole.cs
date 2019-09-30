@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
+using WebApplication.WcfServiceReference;
 
 namespace WebApplication.Security
 {
@@ -32,8 +33,27 @@ namespace WebApplication.Security
                 return null;
             }
 
+            ServicesConnections.AccessWcfService service = new ServicesConnections.AccessWcfService("GetUserByName", "GET", username);
+            string json = service.GetJsonFromService();
+            UserContract user = Newtonsoft.Json.JsonConvert.DeserializeObject<UserContract>(json);
 
-            using (ServiceReference.MusicServiceClient client = new ServiceReference.MusicServiceClient())
+            string[] userRoles = null;
+
+            if (user.Username != null && user.Rank == "admin" )
+            {
+                userRoles = new string[2];
+                userRoles[0] = "User";
+                userRoles[1] = "Admin";
+            }
+            else if (user.Username != null && user.Rank == "user")
+            {
+                userRoles = new string[1];
+                userRoles[0] = "User";
+            }
+
+            return userRoles;
+
+            /*using (ServiceReference.MusicServiceClient client = new ServiceReference.MusicServiceClient())
             {
                 var user = client.GetUserByName(username);
                 string[] userRoles = null;
@@ -51,7 +71,7 @@ namespace WebApplication.Security
                 }
 
                 return userRoles;
-            }
+            }*/
 
         }
 

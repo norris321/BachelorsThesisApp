@@ -9,27 +9,25 @@ namespace WcfService.Logic
 {
     public interface IMusicProcessor
     {
-        Album GetAlbum(int id);
-        Album[] GetAlbums();
-        string AddAlbum(Album album);
+        AlbumContract GetAlbum(int id);
+        AlbumContract[] GetAlbums();
+        string AddAlbum(string artistName, string albumName);
+        string OverrideAlbum(Album album);
+        string DeleteData_Album(int id);
 
-        User GetUserInfoByName(string username);
-        User GetUser(int id);
-        User[] GetUsers();
+        UserContract GetUserInfoByName(string username);
+        UserContract GetUser(int id);
+        UserContract[] GetUsers();
         UserContract Login(string username, string password); 
         string AddUser(User user);
+        string OverrideUser(User user);
+        string DeleteData_User(int id);
 
         Rating GetRating(int id);
         Rating[] GetRatings();
         Rating[] GetRatings(int id);
         string AddRating(Rating rating);
-
-        string OverrideUser(User user);
-        string OverrideRating(Rating rating);
-        string OverrideAlbum(Album album);
-
-        string DeleteData_Album(int id);
-        string DeleteData_User(int id);
+        string OverrideRating(int ratingID, int? rating);
         string DeleteData_Rating(int id);
     }
 }

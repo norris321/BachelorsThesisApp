@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using WebApplication.ServicesConnections;
+using WebApplication.WcfServiceReference;
 
 namespace WebApplication.Models
 {
@@ -20,13 +22,10 @@ namespace WebApplication.Models
         {
             try
             {
-                using(WebApplication.ServiceReference.MusicServiceClient client = new ServiceReference.MusicServiceClient())
-                {
-                    if (NewAlbumName != null && NewArtistName != null)
-                        return client.AddAlbum(new ServiceReference.AlbumContract { ArtistName = NewArtistName, AlbumName = NewAlbumName });
-                    else
-                        return "Forms cannot be empty";
-                }
+                AccessWcfService service = new AccessWcfService("AddAlbum", "POST");
+                var album = new AlbumContract { ArtistName = NewArtistName, AlbumName = NewAlbumName };
+                string returnMessage = service.SendJsonToService(album);
+                return returnMessage;
             }
             catch(Exception e)
             {

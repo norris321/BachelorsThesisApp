@@ -11,7 +11,7 @@ namespace WcfService.Utilities
         Album ReadData_Album(int id);
         Album ReadData_Album(string artistName, string albumName);
         Album[] ReadData_Albums();
-        bool SaveData_Album(Album album);
+        bool SaveData_Album(string artistName, string albumName);
 
         User ReadData_User(int id);
         User ReadData_User(string username, string password);
@@ -26,8 +26,9 @@ namespace WcfService.Utilities
 
         bool UpdateData_User(User user);
         bool UpdateData_Rating(Rating rating);
+        bool UpdateData_Rating(int ratingId, int? rating);
         bool UpdateData_Album(Album album);
-
+        
         bool DeleteData_Album(int id);
         bool DeleteData_User(int id);
         bool DeleteData_Rating(int id);

@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication.ServicesConnections;
+using WebApplication.WcfServiceReference;
 
 namespace WebApplication.Models
 {
@@ -26,10 +28,12 @@ namespace WebApplication.Models
 
         public string AddUser()
         {
-            using (ServiceReference.MusicServiceClient client = new ServiceReference.MusicServiceClient())
-            {
-                return client.AddUser(Username, Password, Rank);
-            }
+            AccessWcfService service = new AccessWcfService("AddUser", "POST");
+            UserLoginContract user = new UserLoginContract { Username = this.Username, Password = this.Password, Rank = this.Rank };
+            string inputJson = Newtonsoft.Json.JsonConvert.SerializeObject(user);
+
+            string returnMessage = service.SendJsonToService(inputJson);
+            return returnMessage;
         }
 
     }

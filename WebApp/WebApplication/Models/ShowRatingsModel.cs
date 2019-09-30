@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using WebApplication.ServiceReference;
+using WebApplication.WcfServiceReference;
 
 namespace WebApplication.Models
 {
@@ -16,7 +16,48 @@ namespace WebApplication.Models
             }
         }
 
-        private  RatingModel[] GetRatings()
+        private RatingModel[] GetRatings()
+        {
+            try
+            {
+                ServicesConnections.AccessWcfService service = new ServicesConnections.AccessWcfService("GetRatings", "GET");
+                var jsonData = service.GetJsonFromService();
+                RatingContract[] array = Newtonsoft.Json.JsonConvert.DeserializeObject<RatingContract[]>(jsonData);
+
+                    var dictionary = new Dictionary<int, RatingModel>();
+
+                    foreach (var a in array)
+                    {
+                        if (dictionary.ContainsKey(a.IdAlbum))
+                        {
+                            dictionary[a.IdAlbum].Add(a.Rating);
+                        }
+                        else
+                        {
+                            dictionary.Add(a.IdAlbum, new RatingModel
+                            { ArtisName = a.ArtistName, AlbumName = a.AlbumName, Rating = (int)a.Rating });
+                        }
+                    }
+
+                    RatingModel[] output = new RatingModel[dictionary.Count];
+
+                    int i = 0;
+                    foreach (KeyValuePair<int, RatingModel> entry in dictionary)
+                    {
+                        output[i] = entry.Value;
+                        i++;
+                    }
+
+                    return output;
+                
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+        /*private  RatingModel[] GetRatings2()
         {
             try
             {
@@ -58,6 +99,10 @@ namespace WebApplication.Models
             }
         }
 
+        private void Test()
+        {
+
+        }*/
 
 
         public class RatingModel

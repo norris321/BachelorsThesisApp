@@ -17,10 +17,10 @@ namespace WcfService.Logic
             dataAccess = context;
         }
 
-        public User GetUserInfoByName(string username)
+        public UserContract GetUserInfoByName(string username)
         {
             var user = dataAccess.ReadData_User(username);
-            return user;
+            return new UserContract(user);
         }
 
 
@@ -30,21 +30,21 @@ namespace WcfService.Logic
             return new UserContract(user);
         }
 
-        public string AddAlbum(Album album)
+        public string AddAlbum(string artistName, string albumName)
         {
-            if (String.IsNullOrEmpty(album.ArtistName)  || String.IsNullOrEmpty(album.AlbumName))
+            if (String.IsNullOrEmpty(artistName)  || String.IsNullOrEmpty(albumName))
             {
                 return "Input forms cannont be empty";
             }
-            else if (album.ArtistName.Length > 30 || album.ArtistName.Length < 3 || album.AlbumName.Length > 30 || album.AlbumName.Length < 3)
+            else if (artistName.Length > 30 || artistName.Length < 3 || albumName.Length > 30 || albumName.Length < 3)
             {
                 return "Artist and album name need to have between 3 and 30 characters.";
             }
-            else if (dataAccess.ReadData_Album(album.ArtistName, album.AlbumName) != null)
+            else if (dataAccess.ReadData_Album(artistName, albumName) != null)
             {
                 return "Album is added already.";
             }
-            else if (dataAccess.SaveData_Album(album))
+            else if (dataAccess.SaveData_Album(artistName, albumName))
             {
                 return "Album added.";
             }
@@ -97,14 +97,23 @@ namespace WcfService.Logic
             }
         }
 
-        public Album GetAlbum(int id)
+        public AlbumContract GetAlbum(int id)
         {
-           return dataAccess.ReadData_Album(id);
+            Album album = dataAccess.ReadData_Album(id);
+            AlbumContract output = new AlbumContract(album);
+            return output;
         }
 
-        public Album[] GetAlbums()
+        public AlbumContract[] GetAlbums()
         {
-            return dataAccess.ReadData_Albums();
+            Album[] albums = dataAccess.ReadData_Albums();
+            AlbumContract[] output = new AlbumContract[albums.Length];
+            for(int i = 0; i < albums.Length;i++)
+            {
+                output[i] = new AlbumContract(albums[i]);
+            }
+
+            return output;
         }
 
         public Rating GetRating(int id)
@@ -122,14 +131,22 @@ namespace WcfService.Logic
             return dataAccess.ReadData_Ratings(id);
         }
 
-        public User GetUser(int id)
+        public UserContract GetUser(int id)
         {
-            return dataAccess.ReadData_User(id);
+            var user = dataAccess.ReadData_User(id);
+            return new UserContract(user);
         }
 
-        public User[] GetUsers()
+        public UserContract[] GetUsers()
         {
-            return dataAccess.ReadData_Users();
+            var users = dataAccess.ReadData_Users();
+            UserContract[] output = new UserContract[users.Length];
+            for(int i = 0; i < output.Length; i++)
+            {
+                output[i] = new UserContract(users[i]);
+            }
+
+            return output;
         }
 
         public string OverrideAlbum(Album album)
@@ -139,9 +156,9 @@ namespace WcfService.Logic
             else return "Record was not updated.";
         }
 
-        public string OverrideRating(Rating rating)
+        public string OverrideRating(int ratingId, int? rating)
         {
-            if (dataAccess.UpdateData_Rating(rating))
+            if (dataAccess.UpdateData_Rating(ratingId, rating))
                 return "Rating record was updated.";
             else
                 return "Record was not updated.";

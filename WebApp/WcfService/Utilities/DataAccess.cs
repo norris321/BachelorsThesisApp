@@ -15,15 +15,12 @@ namespace WcfService.Utilities
             {
                 try
                 {
-                    var checkIfAlbumExists = (from a in context.Albums where a.IdAlbum == id select a).SingleOrDefault();
+                    var albumChecked = (from a in context.Albums where a.IdAlbum == id select a).SingleOrDefault();
 
-                    if (checkIfAlbumExists == null)
+                    if (albumChecked == null)
                         return null;
 
-                    Album output = new Album
-                    { ArtistName = checkIfAlbumExists.ArtistName, AlbumName = checkIfAlbumExists.AlbumName, IdAlbum = checkIfAlbumExists.IdAlbum };
-
-                    return output;
+                    return albumChecked;
                 }
                 catch(Exception)
                 {
@@ -38,15 +35,12 @@ namespace WcfService.Utilities
             {
                 try
                 {
-                    var checkIfAlbumExists = (from a in context.Albums where a.ArtistName == artistName && a.AlbumName == albumName select a).SingleOrDefault();
+                    var albumChecked = (from a in context.Albums where a.ArtistName == artistName && a.AlbumName == albumName select a).SingleOrDefault();
 
-                    if (checkIfAlbumExists == null)
+                    if (albumChecked == null)
                         return null;
 
-                    Album output = new Album
-                    { ArtistName = checkIfAlbumExists.ArtistName, AlbumName = checkIfAlbumExists.AlbumName, IdAlbum = checkIfAlbumExists.IdAlbum };
-
-                    return output;
+                    return albumChecked;
                 }
                 catch (Exception)
                 {
@@ -57,11 +51,12 @@ namespace WcfService.Utilities
 
         public Album[] ReadData_Albums()
         {
+            Album[] query;
             using (var context = new MusicDatabaseEntities())
             {
                 try
                 {
-                    var query = (from a in context.Albums select a).ToArray();
+                    query = (from a in context.Albums select a).ToArray();
                     return query;
                 }
                 catch (Exception)
@@ -77,18 +72,9 @@ namespace WcfService.Utilities
             {
                 try
                 {
-                    var checkIfRatingExists = (from a in context.Ratings where a.IdRating == id select a).SingleOrDefault();
-                    if (checkIfRatingExists == null)
+                    var checkRating = (from a in context.Ratings where a.IdRating == id select a).SingleOrDefault();
+                    if (checkRating == null)
                     {
-                        /*return new Rating
-                        {
-                            Album = new Album(),
-                            IdAlbum = 0,
-                            User = new User(),
-                            IdUser =0,
-                            IdRating = 0,
-                            Rating1 = 0
-                        };*/
                         return null;
                     }
                     else
@@ -164,14 +150,12 @@ namespace WcfService.Utilities
             {
                 try
                 {
-                    var checkIfUserExists = (from u in context.Users where u.IdUser == id select u).SingleOrDefault();
+                    var checkUser = (from u in context.Users where u.IdUser == id select u).SingleOrDefault();
 
-                    if (checkIfUserExists == null)
+                    if (checkUser == null)
                         return null;
 
-                    User output = new User { IdUser = checkIfUserExists.IdUser, Username = checkIfUserExists.Username, Password = checkIfUserExists.Password, Rank = checkIfUserExists.Rank };
-
-                    return output;
+                    return checkUser;
                 }
                 catch (Exception)
                 {
@@ -186,18 +170,20 @@ namespace WcfService.Utilities
             {
                 try
                 {
-                    var checkIfUserExists = (from u in context.Users where u.Username == username 
-                                 && u.Password == password
-                                 select u).SingleOrDefault();
+                    User userFound = ReadData_User(username);
 
-                    if (checkIfUserExists == null)
-                        return null;
+                    if (password == userFound.Password)
+                        return userFound;
 
-                    User output = new User { IdUser = checkIfUserExists.IdUser, Username = checkIfUserExists.Username, Password = checkIfUserExists.Password, Rank = checkIfUserExists.Rank };
+                    string userGuid = userFound.UserGuid.ToString();
+                    string hashedPassword = HashData.Security.HashSHA1(password + userGuid);
 
-                    return output;
+                    if(hashedPassword == userFound.Password)
+                        return userFound;
+
+                    return null;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     return null;
                 }
@@ -210,18 +196,16 @@ namespace WcfService.Utilities
             {
                 try
                 {
-                    var checkIfUserExists = (from u in context.Users
+                    var checkUser = (from u in context.Users
                                  where u.Username == username
                                  select u).SingleOrDefault();
 
-                    if (checkIfUserExists == null)
+                    if (checkUser == null)
                         return null;
 
-                    User output = new User { IdUser = checkIfUserExists.IdUser, Username = checkIfUserExists.Username, Password = checkIfUserExists.Password, Rank = checkIfUserExists.Rank };
-
-                    return output;
+                    return checkUser;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     return null;
                 }
@@ -244,17 +228,17 @@ namespace WcfService.Utilities
             }
         }
 
-        public bool SaveData_Album(Album album)
+        public bool SaveData_Album(string artistName, string albumName)
         {
             using (var context = new MusicDatabaseEntities())
             {
                 try
                 {
-                    var isAlbumAlreadySaved = (from a in context.Albums where a.ArtistName == album.ArtistName && a.AlbumName == album.AlbumName select a).SingleOrDefault();
+                    var isAlbumAlreadySaved = (from a in context.Albums where a.ArtistName == artistName && a.AlbumName == albumName select a).SingleOrDefault();
                     if (isAlbumAlreadySaved != null)
                         return false;
 
-                    context.Albums.Add(album);
+                    context.Albums.Add(new Album {ArtistName = artistName, AlbumName = albumName });
                     context.SaveChanges();
                     return true;
                 }
@@ -295,22 +279,34 @@ namespace WcfService.Utilities
         {
             using (var context = new MusicDatabaseEntities())
             {
-                var isUserAlreadySaved = (from u in context.Users where user.Username == u.Username select u).SingleOrDefault();
+                var isUserAlreadySaved = (from u in context.Users
+                                          where user.Username == u.Username select u).SingleOrDefault();
+
                 if (isUserAlreadySaved != null)
                     return false;
 
                 try
                 {
+                    Guid userGuid = System.Guid.NewGuid();
+
+                    string hashedPassword = HashData.Security.HashSHA1
+                        (user.Password + userGuid.ToString());
+
+                    user.Password = hashedPassword;
+                    user.UserGuid = userGuid;
+
                     context.Users.Add(user);
                     context.SaveChanges();
+
                     return true;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     return false;
                 }
             }
         }
+
 
         public bool UpdateData_Album(Album album)
         {
@@ -327,7 +323,6 @@ namespace WcfService.Utilities
                 {
                     album.AlbumName = actualRecord.AlbumName;
                 }
-
 
                 try
                 {
@@ -351,12 +346,30 @@ namespace WcfService.Utilities
             {
                 try
                 {
-                    //var record = context.Ratings.Where(r => r.IdAlbum == rating.IdAlbum && r.IdUser == rating.IdUser).FirstOrDefault();
                     var record = context.Ratings.SingleOrDefault(r => r.IdAlbum == rating.IdAlbum && r.IdUser == rating.IdUser);
 
                     record.Rating1 = rating.Rating1;
                     record.IdUser = rating.IdUser;
                     record.IdAlbum = rating.IdAlbum;
+                    context.SaveChanges();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+        }
+        
+        public bool UpdateData_Rating(int ratingId, int? rating)
+        {
+            using (var context = new MusicDatabaseEntities())
+            {
+                try
+                {
+                    var record = context.Ratings.SingleOrDefault(r => r.IdRating == ratingId);
+
+                    record.Rating1 = rating;
                     context.SaveChanges();
                     return true;
                 }
@@ -373,7 +386,34 @@ namespace WcfService.Utilities
             {
                 try
                 {
-                    var actualRecord = ReadData_User(user.IdUser);
+                    var record = context.Users.Where(u => u.IdUser == user.IdUser).FirstOrDefault();
+
+                    if (record == null)
+                        return false;
+                    
+
+                    if (user.Username != null)
+                    {
+                        record.Username = user.Username;
+                    }
+                    if (user.Rank != null)
+                    {
+                        record.Rank = user.Rank;
+                    }
+                    if (user.Password != null)
+                    {
+                        //actualRecord.Password = user.Password;
+                        Guid userGuid = System.Guid.NewGuid();
+
+                        string hashedPassword = HashData.Security.HashSHA1
+                            (user.Password + userGuid.ToString());
+
+                        record.Password = hashedPassword;
+                        record.UserGuid = userGuid;
+                    }
+
+                    context.SaveChanges();
+                    /*var actualRecord = ReadData_User(user.IdUser);
                     if(user.Username == null)
                     {
                         user.Username = actualRecord.Username;
@@ -389,14 +429,13 @@ namespace WcfService.Utilities
                         user.Rank = actualRecord.Rank;
                     }
 
-
                     var record = context.Users.Where(u => u.IdUser == user.IdUser).FirstOrDefault();
 
                     record.IdUser = user.IdUser;
                     record.Password = user.Password;
                     record.Username = user.Username;
                     record.Rank = user.Rank;
-                    context.SaveChanges();
+                    context.SaveChanges();*/
                     return true;
                 }
                 catch (Exception)

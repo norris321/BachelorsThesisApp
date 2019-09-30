@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
-using WebApplication.ServiceReference;
+using WebApplication.WcfServiceReference;
 
 namespace WebApplication.Security
 {

@@ -42,13 +42,6 @@ namespace WebApplication.Controllers
             return View(new ModifyAlbumModel());
         }
 
-        //[HttpPost]
-        /*public ActionResult ModifyAlbum(ModifyAlbumModel model)
-        {
-            var msg = model.Modify();
-            ViewBag.Message = msg;
-            return View(new ModifyAlbumModel());
-        }*/
 
         [HttpPost]
         [MultipleButton(Name = "action", Argument = "ModifyAlbum")]
@@ -84,7 +77,7 @@ namespace WebApplication.Controllers
 
         [HttpPost]
         [MultipleButton(Name = "action", Argument = "DeleteUser")]
-        public ActionResult DeleteUser(ModifyAlbumModel model)
+        public ActionResult DeleteUser(ModifyUserModel model)
         {
             var msg = model.Delete();
             ViewBag.Message = msg;

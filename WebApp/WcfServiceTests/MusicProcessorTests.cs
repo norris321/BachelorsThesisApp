@@ -98,7 +98,7 @@ namespace WcfServiceTests
 
                 //Assert
                 Assert.AreEqual(expected.Username, actual.Username);
-                Assert.AreEqual(expected.Password, actual.Password);
+                //Assert.AreEqual(expected.Password, actual.Password);
                 Assert.AreEqual(expected.Rank, actual.Rank);
 
             }
@@ -192,7 +192,7 @@ namespace WcfServiceTests
                 for (int i = 0; i < expected.Count; i++)
                 {
                     Assert.AreEqual(expected[i].Username, actual[i].Username);
-                    Assert.AreEqual(expected[i].Password, actual[i].Password);
+                    //Assert.AreEqual(expected[i].Password, actual[i].Password);
                     Assert.AreEqual(expected[i].Rank, actual[i].Rank);
                     Assert.AreEqual(expected[i].IdUser, actual[i].IdUser);
                 }
@@ -245,35 +245,16 @@ namespace WcfServiceTests
             {
                 //Arrange
                 var album = TestData.SampleAlbumData(1)[0];
-                mock.Mock<IDataAccess>().Setup(x => x.SaveData_Album(album)).Returns(true);
+                mock.Mock<IDataAccess>().Setup(x => x.SaveData_Album(album.ArtistName, album.AlbumName)).Returns(true);
                 var cls = mock.Create<MusicProcessor>();
                 //Act
-                var actual = cls.AddAlbum(album);
+                var actual = cls.AddAlbum(album.ArtistName, album.AlbumName);
                 var expected = "Album added.";
                 //Assert
                 Assert.AreEqual(expected, actual);
-                mock.Mock<IDataAccess>().Verify(x => x.SaveData_Album(album), Times.Exactly(1));
+                mock.Mock<IDataAccess>().Verify(x => x.SaveData_Album(album.ArtistName, album.AlbumName), Times.Exactly(1));
             }
         }
-
-        /*[Test]
-        public void AddAlbum_AlbumWasAddedBefore()
-        {
-            using (var mock = AutoMock.GetLoose())
-            {
-                //Arrange
-                var album = TestData.SampleAlbumData(1)[0];
-                //mock.Mock<IDataAccess>().Setup(x => x.SaveData_Album(album)).Returns(true);
-                mock.Mock<IDataAccess>().Setup(x => x.ReadData_Album(It.IsAny<string>(), It.IsAny<string>())).Returns(album);
-                var cls = mock.Create<MusicProcessor>();
-                //Act
-                var actual = cls.AddAlbum(album);
-                var expected = "Album is added already.";
-                //Assert
-                Assert.AreEqual(expected, actual);
-                mock.Mock<IDataAccess>().Verify(x => x.SaveData_Album(album), Times.Exactly(1));
-            }
-        }*/
 
         [TestCase(1, "b", "a", ExpectedResult = "Artist and album name need to have between 3 and 30 characters.")]
         [TestCase(1, TestData.SampleString_Above30Characters, "abc", ExpectedResult = "Artist and album name need to have between 3 and 30 characters.")]
@@ -284,7 +265,7 @@ namespace WcfServiceTests
         //[TestCase(1, "dder", "cfgh", ExpectedResult = "Album added")]
         public string AddAlbumWrongInputs(int id, string artist, string album)
         {
-            MusicService service = new MusicService();
+            MusicServiceRest service = new MusicServiceRest();
             //Mock mock = new Mock<IDataAccess>().Setup(x => x.SaveData_User(It.IsAny<User>())).Returns(true);
             var testAlbum = new AlbumContract { IdAlbum = id, ArtistName = artist, AlbumName = album };
             string result = service.AddAlbum(testAlbum);
@@ -315,23 +296,6 @@ namespace WcfServiceTests
             }
         }
 
-        /*[Test]
-        public void AddUser_InvalidCallAlbumIs()
-        {
-            using (var mock = AutoMock.GetLoose())
-            {
-                //Arrange
-                var user = TestData.SampleUserData(1)[0];
-                mock.Mock<IDataAccess>().Setup(x => x.SaveData_User(user)).Returns(true);
-                var cls = mock.Create<MusicProcessor>();
-                //Act
-                var actual = cls.AddUser(user);
-                var expected = "User added.";
-                //Assert
-                Assert.AreEqual(expected, actual);
-                mock.Mock<IDataAccess>().Verify(x => x.SaveData_User(user), Times.Exactly(1));
-            }
-        }*/
 
 
         [TestCase(1, "", "aaa", ExpectedResult = "Input forms cannont be empty.")]
@@ -342,10 +306,11 @@ namespace WcfServiceTests
         [TestCase(1, "abc", TestData.SampleString_Above30Characters, ExpectedResult = "Password needs to have between 3 and 30 characters.")]
         public string AddUser(int id, string username, string password)
         {
-            MusicService service = new MusicService();
-            //var testUser = new UserContract { IdUser = id, Username = username, Rank = "Admin" };
+            MusicServiceRest service = new MusicServiceRest();
 
-            string result = service.AddUser(username, password, "Admin");
+            UserLoginContract user = new UserLoginContract { Username = username, Password = password, Rank = "Admin" };
+
+            string result = service.AddUser(user);
 
             return result;
         }
@@ -390,17 +355,6 @@ namespace WcfServiceTests
             mock.Verify(x => x.ReadData_User(It.IsAny<int>()), Times.Exactly(1));
             mock.Verify(x => x.ReadData_Album(It.IsAny<int>()), Times.Exactly(1));
             Assert.AreEqual(expected, actual);
-        }
-
-        [TestCase(1, 1, 0, ExpectedResult = "Rating needs to be between 1 - 10 range.")]
-        [TestCase(1, 1, 11, ExpectedResult = "Rating needs to be between 1 - 10 range.")]
-        public string AddRating_WrongRatingSize(int idUser, int idAlbum, int rating)
-        {
-            MusicService service = new MusicService();
-
-            string result = service.AddRating(idUser, idAlbum, rating);
-
-            return result;
         }
     }
 
@@ -458,11 +412,11 @@ namespace WcfServiceTests
             //Arragnge
             var mock = new Mock<IDataAccess>();
             var rating = TestData.SampleRatingData(1)[0];
-            mock.Setup(x => x.UpdateData_Rating(It.IsAny<Rating>())).Returns(true);
+            mock.Setup(x => x.UpdateData_Rating(It.IsAny<int>(), It.IsAny<int?>())).Returns(true);
             var cls = new MusicProcessor(mock.Object);
 
             //Act
-            var actual = cls.OverrideRating(rating);
+            var actual = cls.OverrideRating(It.IsAny<int>(), It.IsAny<int?>());
 
             //Assert
             mock.Setup(x => x.UpdateData_Rating(It.IsAny<Rating>())).Verifiable();

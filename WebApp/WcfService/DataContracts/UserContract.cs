@@ -8,16 +8,13 @@ using System.Threading.Tasks;
 namespace WcfService.DataContracts
 {
     [DataContract]
-    public class UserContract
+    public class UserContract : IUserContract
     {
         [DataMember]
         public int IdUser { set; get; }
 
         [DataMember]
         public string Username { set; get; }
-
-        //[DataMember]
-        //public string Password { set; get; }
 
         [DataMember]
         public string Rank { set; get; }

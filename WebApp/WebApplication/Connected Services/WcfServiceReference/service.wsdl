@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="MusicServiceRest" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/WcfService.DataContracts" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IMusicServiceRest_GetAlbums_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAlbums" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_GetAlbums_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAlbumsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_GetAlbum_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAlbum" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_GetAlbum_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAlbumResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_AddAlbum_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddAlbum" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_AddAlbum_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddAlbumResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_DeleteAlbum_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteAlbum" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_DeleteAlbum_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteAlbumResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_ModifyAlbum_InputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyAlbum" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_ModifyAlbum_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyAlbumResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_GetUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsers" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_GetUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_GetUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUser" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_GetUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_GetUserByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByName" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_GetUserByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_AddUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddUser" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_AddUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_DeleteUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUser" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_DeleteUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_ModifyUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyUser" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_ModifyUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_Login_InputMessage">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_Login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_GetRatings_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRatings" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_GetRatings_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRatingsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_GetRatingsForUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRatingsForUser" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_GetRatingsForUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRatingsForUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_GetRating_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRating" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_GetRating_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRatingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_AddRating_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddRating" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_AddRating_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddRatingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_DeleteRating_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRating" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_DeleteRating_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRatingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_ModifyRating_InputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyRating" />
+  </wsdl:message>
+  <wsdl:message name="IMusicServiceRest_ModifyRating_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyRatingResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IMusicServiceRest">
+    <wsdl:operation name="GetAlbums">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicServiceRest/GetAlbums" message="tns:IMusicServiceRest_GetAlbums_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicServiceRest/GetAlbumsResponse" message="tns:IMusicServiceRest_GetAlbums_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAlbum">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicServiceRest/GetAlbum" message="tns:IMusicServiceRest_GetAlbum_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicServiceRest/GetAlbumResponse" message="tns:IMusicServiceRest_GetAlbum_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAlbum">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicServiceRest/AddAlbum" message="tns:IMusicServiceRest_AddAlbum_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicServiceRest/AddAlbumResponse" message="tns:IMusicServiceRest_AddAlbum_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAlbum">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicServiceRest/DeleteAlbum" message="tns:IMusicServiceRest_DeleteAlbum_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicServiceRest/DeleteAlbumResponse" message="tns:IMusicServiceRest_DeleteAlbum_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyAlbum">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicServiceRest/ModifyAlbum" message="tns:IMusicServiceRest_ModifyAlbum_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicServiceRest/ModifyAlbumResponse" message="tns:IMusicServiceRest_ModifyAlbum_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicServiceRest/GetUsers" message="tns:IMusicServiceRest_GetUsers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicServiceRest/GetUsersResponse" message="tns:IMusicServiceRest_GetUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicServiceRest/GetUser" message="tns:IMusicServiceRest_GetUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicServiceRest/GetUserResponse" message="tns:IMusicServiceRest_GetUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicServiceRest/GetUserByName" message="tns:IMusicServiceRest_GetUserByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicServiceRest/GetUserByNameResponse" message="tns:IMusicServiceRest_GetUserByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicServiceRest/AddUser" message="tns:IMusicServiceRest_AddUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicServiceRest/AddUserResponse" message="tns:IMusicServiceRest_AddUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicServiceRest/DeleteUser" message="tns:IMusicServiceRest_DeleteUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicServiceRest/DeleteUserResponse" message="tns:IMusicServiceRest_DeleteUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicServiceRest/ModifyUser" message="tns:IMusicServiceRest_ModifyUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicServiceRest/ModifyUserResponse" message="tns:IMusicServiceRest_ModifyUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicServiceRest/Login" message="tns:IMusicServiceRest_Login_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicServiceRest/LoginResponse" message="tns:IMusicServiceRest_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRatings">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicServiceRest/GetRatings" message="tns:IMusicServiceRest_GetRatings_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicServiceRest/GetRatingsResponse" message="tns:IMusicServiceRest_GetRatings_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRatingsForUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicServiceRest/GetRatingsForUser" message="tns:IMusicServiceRest_GetRatingsForUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicServiceRest/GetRatingsForUserResponse" message="tns:IMusicServiceRest_GetRatingsForUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRating">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicServiceRest/GetRating" message="tns:IMusicServiceRest_GetRating_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicServiceRest/GetRatingResponse" message="tns:IMusicServiceRest_GetRating_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddRating">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicServiceRest/AddRating" message="tns:IMusicServiceRest_AddRating_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicServiceRest/AddRatingResponse" message="tns:IMusicServiceRest_AddRating_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRating">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicServiceRest/DeleteRating" message="tns:IMusicServiceRest_DeleteRating_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicServiceRest/DeleteRatingResponse" message="tns:IMusicServiceRest_DeleteRating_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyRating">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicServiceRest/ModifyRating" message="tns:IMusicServiceRest_ModifyRating_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicServiceRest/ModifyRatingResponse" message="tns:IMusicServiceRest_ModifyRating_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:service name="MusicServiceRest" />
+</wsdl:definitions>
